@@ -1,14 +1,15 @@
 import { Button } from "@/app/components/Button";
 import Image from "next/image";
+import Link from "next/link";
 // style={{ backgroundImage: `url(/assets/bgImage.jpg)` }}
 const Navbar = () => {
-     const navArr = [
-       { id: 1, route: "Home" },
-       { id: 2, route: "About" },
-       { id: 3, route: "Service" },
-       { id: 4, route: "Blog" },
-       { id: 5, route: "Contacts"},
-     ];
+  const navArr = [
+    { id: 1, name: "Home", route: "/" },
+    { id: 2, name: "About", route: "/about" },
+    { id: 3, name: "Service", route: "/service" },
+    { id: 4, name: "Blog", route: "Blog" },
+    { id: 5, name: "Contacts", route: "Contacts" },
+  ];
   return (
     <header className="  bg-transparent relative">
       <nav className="flex items-center bg-white/20 backdrop-blur-[2px] justify-between absolute w-[100%] xl:px-24 lg:px-16 py-3  px-7 text-white">
@@ -26,13 +27,13 @@ const Navbar = () => {
               key={navigation.id}
               className="text-lg font-semibold hover:text-primary duration-300 ease-out cursor-pointer"
             >
-              <a
-                href={`#${navigation.route}`}
+              <Link
+                href={navigation.route}
                 data-scroll-to
                 className="cursor-pointer"
               >
-                {navigation.route}
-              </a>
+                {navigation.name}
+              </Link>
             </li>
           ))}
         </ul>
@@ -69,6 +70,6 @@ const Navbar = () => {
       </nav>
     </header>
   );
-}
+};
 
 export default Navbar
