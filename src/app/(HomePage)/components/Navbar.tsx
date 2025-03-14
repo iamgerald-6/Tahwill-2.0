@@ -11,7 +11,7 @@ const Navbar = () => {
      ];
   return (
     <header className="  bg-transparent relative">
-      <nav className="flex items-center justify-between absolute w-[100%] xl:px-24 lg:px-16   px-7 pt-3 text-white">
+      <nav className="flex items-center bg-white/20 backdrop-blur-[2px] justify-between absolute w-[100%] xl:px-24 lg:px-16 py-3  px-7 text-white">
         <div className="">
           <Image
             width={70}
@@ -36,10 +36,8 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <div>
-          <Button>
-            Book an Appointment
-          </Button>
+        <div className="md:block hidden">
+          <Button>Book an Appointment</Button>
         </div>
         <div className="md:hidden block">
           {/* <Sheet open={open} onOpenChange={setOpen}>

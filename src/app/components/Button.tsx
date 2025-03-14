@@ -1,57 +1,64 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
-
+/* eslint-disable react/display-name */
 import { cn } from "@/app/lib/utils";
+import { Loader } from "@mantine/core";
+import { VariantProps, cva } from "class-variance-authority";
+import { ButtonHTMLAttributes, forwardRef } from "react";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "font-semibold text-sm rounded-md disabled:cursor-not-allowed flex items-center justify-center  border-2 transition-colors duration-200",
   {
     variants: {
       variant: {
-        default:
-          "text-primary-foreground relative bg-gradient-to-r from-primary via-primary-100 to-primary-200",
-        destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        primary:
+          "border-2 shadow-sm border-white text-white font-semibold bg-transparent hover:border-primary hover:shadow-primary",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "border-green-300 text-primary bg-white dark:bg-grey-400 dark:text-green-100 hover:border-primary-200",
+        warning: "border-red-500 text-red-500 bg-white hover:border-red-400",
+        filter:
+          "border-gray-300 text-black bg-white border-dashed hover:border-primary-200",
+        ghost:
+          "border-0 bg-white text-black hover:bg-gray-100 shadow-none hover:border-transparent",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        primary: "px-4 py-2",
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: "primary",
+      size: "primary",
     },
   }
 );
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+interface Props
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
+  loading?: boolean;
+  loadingText?: string;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
+const Button = forwardRef<HTMLButtonElement, Props>(
+  (
+    { className, size, variant, loading, loadingText, children, ...props },
+    ref
+  ) => {
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+      <button
         ref={ref}
+        className={cn(buttonVariants({ size, variant }), className)}
         {...props}
-      />
+      >
+        {loading ? (
+          <>
+            <Loader color={variant === "primary" ? "gray" : "blue"} size="sm" />
+            {loadingText && <span className="ml-2">{loadingText}</span>}
+          </>
+        ) : (
+          children
+        )}
+      </button>
     );
   }
 );
-Button.displayName = "Button";
 
 export { Button, buttonVariants };
