@@ -4,7 +4,7 @@ import Image from "next/image"
 const About = () => {
   return (
     <div className="mt-16 pb-10 ">
-      <div className="grid grid-cols-2 gap-16 px-10   ">
+      <div className="grid grid-cols-2 gap-16 xl:px-24 lg:px-16   ">
         <div>
           <Image
             src={"/assets/about-home.png"}
@@ -15,7 +15,7 @@ const About = () => {
         </div>
         {/* <div> */}
         <div className="relative ">
-          <span className="bg-gradient-to-r from-primary to-primary-100 bg-clip-text text-transparent text-2xl font-semibold">
+          <span className="bg-gradient-to-r from-primary to-primary-100 bg-clip-text text-transparent text-xl font-semibold">
             About us
           </span>
 
@@ -23,7 +23,7 @@ const About = () => {
             Empowering Wellness,
             <br className="hidden md:block" /> Transforming Lives
           </h3>
-          <p className="w-[80%] text-primary text-2xl mt-3 font-medium">
+          <p className="w-[80%] text-primary text-xl mt-3 font-medium">
             We design personalized wellness solutions, combining science, data,
             and culture to drive lasting health and well-being for individuals
             and businesses.
@@ -37,7 +37,9 @@ const About = () => {
               <span className="text-xl">Established</span>
             </div>
             <div className="text-primary grid">
-              <span className="bg-gradient-to-b from-primary to-primary-200 bg-clip-text text-transparent text-3xl font-semibold text-center">100+</span>
+              <span className="bg-gradient-to-b from-primary to-primary-200 bg-clip-text text-transparent text-3xl font-semibold text-center">
+                100+
+              </span>
               <span className="text-xl">Happy Clients</span>
             </div>
           </div>
