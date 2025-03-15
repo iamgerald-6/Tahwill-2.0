@@ -17,7 +17,7 @@ const Hero = () => {
                 <br /> health and vitality.
               </p>
             </div>
-            <div className="text-white xl:text-6xl lg:text-5xl md:text-4xl text-3xl  uppercase mt-5">
+            <div className="text-white xl:text-6xl lg:text-5xl md:text-4xl text-3xl  uppercase mt-8">
               <p>
                 Redefining{" "}
                 <span className="bg-gradient-to-r from-primary via-primary-100 to-primary-200 bg-clip-text text-transparent">
