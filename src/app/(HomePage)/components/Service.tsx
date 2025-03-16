@@ -56,7 +56,7 @@ const Service = () => {
                   </h3>
                 </div>
                 <div className="">
-                  <p className="text-sm ">{serve.desc}</p>
+                  <p className="text-sm text-primary ">{serve.desc}</p>
                 </div>
               </div>
             ))}

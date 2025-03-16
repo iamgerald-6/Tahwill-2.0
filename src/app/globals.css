@@ -13,6 +13,7 @@
   --color-primary-200: #E7B73C;
   --color-primary-400: #E9ECF3;
   --color-primary-300: #201E1E;
+  --color-primary-500: #22252C;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
