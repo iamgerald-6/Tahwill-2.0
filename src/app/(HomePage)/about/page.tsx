@@ -3,7 +3,7 @@ import Image from "next/image";
 const About = () => {
   return (
     <>
-      <div className="min-h-screen">
+      <div>
         {/* Hero Section */}
         <div className="bg-[url(/assets/about.jpg)] bg-cover bg-center rounded-br-[80px] bg-no-repeat h-[75vh] ">
           <div className="bg-black/60 h-[75vh] w-full rounded-br-[80px]">
