@@ -25,7 +25,7 @@ const Navbar = () => {
           {navArr?.map((navigation) => (
             <li
               key={navigation.id}
-              className="text-lg font-semibold hover:text-primary duration-300 ease-out cursor-pointer"
+              className="text-lg font-medium hover:text-primary duration-300 ease-out cursor-pointer"
             >
               <Link
                 href={navigation.route}
