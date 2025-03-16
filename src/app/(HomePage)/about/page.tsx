@@ -3,29 +3,19 @@ import Image from "next/image";
 const About = () => {
   return (
     <>
-   
-
       <div className="min-h-screen">
         {/* Hero Section */}
-        <div className="">
-         
-          <div className="  bg-black/60 rounded-br-[80px]" />
-          <div className="relative flex items-center justify-center xl:px-24 lg:px-16 px-7 min-h-screen text-white sm:text-xl uppercase text-center">
-            <div>
-              <p>
-                <span className="bg-gradient-to-r from-primary via-primary-100 to-primary-200 bg-clip-text text-transparent">
-                  Data-driven solutions,
-                </span>{" "}
-                expert guidance, and tailored programs to help you achieve
-                lasting health and vitality.
-              </p>
-              <h1 className="text-white xl:text-6xl lg:text-5xl md:text-4xl text-3xl uppercase mt-5">
-                Redefining{" "}
-                <span className="bg-gradient-to-r from-primary via-primary-100 to-primary-200 bg-clip-text text-transparent">
-                  Wellness
-                </span>
-                : Community, Education & Holistic Healing Solutions
-              </h1>
+        <div className="bg-[url(/assets/about.jpg)] bg-cover bg-center rounded-br-[80px] bg-no-repeat h-[75vh] ">
+          <div className="bg-black/60 h-[75vh] w-full rounded-br-[80px]">
+            <div className="flex  items-center justify-center xl:px-24 lg:px-16 px-7 h-[75vh] text-white sm:text-xl   uppercase ">
+              <div className="grid">
+                <div className="lg:flex lg:flex-col lg:items-center">
+                  <p>Know more</p>
+                </div>
+                <div className="text-white xl:text-6xl lg:text-5xl md:text-4xl text-3xl  uppercase mt-8">
+                  <p>About us</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -42,23 +32,23 @@ const About = () => {
               health and growth.
             </p>
           </div>
-           <div>
-           <Image
+          <div>
+            <Image
               src={"/assets/mission.png"}
               alt="About Image"
               width={300}
               height={100}
             />
-           </div>
+          </div>
           {/* Stats Section */}
           <div className="flex flex-col items-center text-center mt-7">
             <span className="text-primary text-3xl font-semibold">
               Our Vision
             </span>
             <p className="text-primary text-xl mt-4 max-w-xs">
-              We design personalized wellness solutions, combining science, data,
-              and culture to drive lasting health and well-being for individuals
-              and businesses.
+              We design personalized wellness solutions, combining science,
+              data, and culture to drive lasting health and well-being for
+              individuals and businesses.
             </p>
           </div>
         </div>
@@ -110,8 +100,9 @@ const About = () => {
           <p className="max-w-2xl text-lg text-gray-700 mt-6">
             For businesses, we develop workplace wellness programs, conduct
             productivity assessments, and offer tailored workshops to create
-            healthier, more engaged teams. We also support wellness entrepreneurs
-            with strategic consulting and data-driven growth solutions.
+            healthier, more engaged teams. We also support wellness
+            entrepreneurs with strategic consulting and data-driven growth
+            solutions.
           </p>
         </div>
       </div>
