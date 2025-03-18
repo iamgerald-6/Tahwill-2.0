@@ -1,6 +1,4 @@
-import Image from "next/image"
-
-
+import Image from "next/image";
 const About = () => {
   return (
     <div className="mt-16 pb-10 ">
@@ -48,6 +46,6 @@ const About = () => {
       </div>
     </div>
   );
-}
+};
 
-export default About
+export default About;

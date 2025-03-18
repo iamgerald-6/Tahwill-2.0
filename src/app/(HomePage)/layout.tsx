@@ -9,6 +9,9 @@ import {
 } from "@mantine/core";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ReduxProvider from "../components/Provider";
+import QueryProvider from "../components/QueryProvider";
+import { Toaster } from "sonner";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -38,11 +41,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <MantineProvider>
-          <Navbar/>
-          {children}
-          <Footer/>
-        </MantineProvider>
+        <ReduxProvider>
+          <QueryProvider>
+            <Toaster richColors position="top-center" />
+            <MantineProvider defaultColorScheme="light">
+            <Navbar/>
+              {children}
+              <Footer/>
+            </MantineProvider>
+          </QueryProvider>
+        </ReduxProvider>
       </body>
     </html>
   );
