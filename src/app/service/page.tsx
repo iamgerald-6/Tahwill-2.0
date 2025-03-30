@@ -2,7 +2,7 @@ import React from 'react'
 import HeroService from "./components/HeroService";
 import WhatweDo from "./components/WhatweDo";
 import Featured from "./components/Featured";
-import Contact from "../components/Contact";
+import Contact from "../sections/Contact";
 
 const Service = () => {
   return (

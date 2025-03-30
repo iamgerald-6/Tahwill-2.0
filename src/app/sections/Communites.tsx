@@ -4,28 +4,28 @@ const Communities = () => {
     const commArr = [
       {
         id: 1,
-        title: "Something",
-        desc: "We provide personalized wellness consulting, corporate wellness programs, and business growth strategies, helping individuals and businesses thrive in the wellness industry.",
+        title: "About the Community",
+        desc: "We believe wellness is a collective journey. That’s why we’re building a robust, interconnected wellness ecosystem across Nigeria and Africa, providing the support you need to achieve sustainable, optimal health.",
       },
       {
         id: 2,
-        title: "Something",
-        desc: "We provide personalized wellness consulting, corporate wellness programs, and business growth strategies, helping individuals and businesses thrive in the wellness industry.",
+        title: "Community Initiatives (What Members Gain)",
+        desc: "Access to workshops, webinars, and online courses on mental health, nutrition, and holistic wellness.",
       },
       {
         id: 3,
-        title: "Something",
-        desc: "We provide personalized wellness consulting, corporate wellness programs, and business growth strategies, helping individuals and businesses thrive in the wellness industry.",
+        title: "Networking & Collaboration",
+        desc: "Building a network of like-minded businesses to foster a wellness ecosystem.",
       },
       {
         id: 4,
-        title: "Something",
-        desc: "We provide personalized wellness consulting, corporate wellness programs, and business growth strategies, helping individuals and businesses thrive in the wellness industry.",
+        title: "Expert Guidance & Support",
+        desc: "Access to a network of wellness professionals (nutritionists, therapists, fitness coaches, wellness practitioners).",
       },
     ];
   return (
     <div className="bg-[url(/assets/community.jpg)] bg-cover bg-center  bg-no-repeat min-h-[120vh] ">
-      <div className="bg-black/22 min-h-[120vh] backdrop-blur-[4px] w-full ]">
+      <div className="bg-black/50 min-h-[120vh] backdrop-blur-[4px] w-full ]">
         <div className="pt-20">
           <h3 className="text-center text-primary-200 font-semibold text-2xl">
             Join Our Exclusive Wellness Community
@@ -37,7 +37,7 @@ const Communities = () => {
           </h5>
           <div>
             <div className="grid grid-cols-2 px-28 mt-10 ">
-              {" "}
+              {""}
               {commArr.map((community, i) => (
                 <div key={community.id} className="border border-white  py-7">
                   <div className="grid gap-1 py-2 px-5">

@@ -1,9 +1,9 @@
-import About from "./components/About";
-import Ceo from "./components/Ceo";
-import Communities from "./components/Communites";
-import Contact from "./components/Contact";
-import Hero from "./components/Hero";
-import Service from "./components/Service";
+import About from "./sections/About";
+import Ceo from "./sections/Ceo";
+import Communities from "./sections/Communites";
+import Contact from "./sections/Contact";
+import Hero from "./sections/Hero";
+import Service from "./sections/Service";
 
 const Home = () => {
   return (
@@ -11,7 +11,7 @@ const Home = () => {
       <div>
         <Hero />
       </div>
-      <div>
+      <div className="bg-gradient-to-b from-primary/5  via-primary-100/5 to-primary-200/5">
         <About />
       </div>
       <div>

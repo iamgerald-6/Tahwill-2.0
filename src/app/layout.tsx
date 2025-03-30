@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css";
+import "./globals.css";
 import "@mantine/core/styles.css";
 import {
   ColorSchemeScript,
   MantineProvider,
   mantineHtmlProps,
 } from "@mantine/core";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import ReduxProvider from "../components/Provider";
-import QueryProvider from "../components/QueryProvider";
+import Navbar from "./sections/Navbar";
+import Footer from "./sections/Footer";
+import ReduxProvider from "./components/Provider";
+import QueryProvider from "./components/QueryProvider";
 import { Toaster } from "sonner";
 const geistSans = Geist({
   variable: "--font-geist-sans",

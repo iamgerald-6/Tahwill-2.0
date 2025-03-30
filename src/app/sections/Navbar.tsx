@@ -8,7 +8,7 @@ const Navbar = () => {
     { id: 2, name: "About", route: "/about" },
     { id: 3, name: "Service", route: "/service" },
     { id: 4, name: "Blog", route: "/blog" },
-    { id: 5, name: "Contacts", route: "Contacts" },
+  
   ];
   return (
     <header className="  bg-transparent relative">
@@ -25,7 +25,7 @@ const Navbar = () => {
           {navArr?.map((navigation) => (
             <li
               key={navigation.id}
-              className="text-lg font-medium hover:text-primary duration-300 ease-out cursor-pointer"
+              className="text-lg  hover:text-primary duration-300 ease-out cursor-pointer"
             >
               <Link
                 href={navigation.route}
