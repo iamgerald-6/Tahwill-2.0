@@ -9,8 +9,13 @@ import DOMPurify from "dompurify";
 
 const BlogPost = () => {
   const getBlogData = async () => {
-    const res = await api.get(apiRoutes.blog.getBlog);
-    return res.data;
+    const res = await fetch(`/api/blog/`);
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch blog");
+    }
+
+    return res.json();
   };
 
   const { data } = useQuery<Blogdata>({
