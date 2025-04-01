@@ -12,7 +12,7 @@ import Footer from "./sections/Footer";
 import ReduxProvider from "./components/Provider";
 import QueryProvider from "./components/QueryProvider";
 import { Toaster } from "sonner";
-import Preloader from "./Prealoder";
+
 import PreloaderWrapper from "./components/PreloaderWrapper";
 const geistSans = Geist({
   variable: "--font-geist-sans",
