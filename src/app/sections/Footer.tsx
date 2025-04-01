@@ -6,7 +6,6 @@ const Footer = () => {
       { id: 2, route: "About" },
       { id: 3, route: "Service" },
       { id: 4, route: "Blog" },
-      { id: 5, route: "Contacts" },
     ];
   return (
     <div>

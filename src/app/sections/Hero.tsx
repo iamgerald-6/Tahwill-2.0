@@ -3,31 +3,43 @@
 import { useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import { ArrowUpRight } from "lucide-react";
-
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
   const images = [
+    "/assets/bgImage2.jpg",
     "/assets/bgImage.jpg",
-    "/assets/imagery (1).jpg",
-    "/assets/imagery (5).jpg",
+    "/assets/bgImage3.jpg",
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
-
+  const router = useRouter();
+  const handleBrowseJobsClick = () => {
+    router.push("/about");
+  };
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 1000); 
+      setTimeout(() => {
+        setCurrentImage((prev) => (prev + 1) % images.length);
+      }, 1000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [images.length]);
+
   return (
     <div
-      className="bg-[url(/assets/bgImage.jpg)] bg-cover bg-center bg-no-repeat  min-h-[95vh]"
-      style={{ backgroundImage: `url(${images[currentImage]})` }}
+      className="transition-opacity duration-1000"
+      style={{
+        backgroundImage: `url(${images[currentImage]})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        minHeight: "100vh",
+      }}
     >
-      <div className="bg-black/60  min-h-[95vh] w-full">
-        <div className="flex md:px-20 md:pt-42 pt-34 px-8 h-[95vh]  text-white">
+      <div className="bg-black/60  min-h-[100vh] w-full">
+        <div className="flex md:px-20 md:pt-42 pt-34 px-8 min-h-[100vh]  text-white">
           <div className="">
             <div className="text-white  lg:text-7xl md:text-5xl text-4xl ">
               <p>
@@ -49,7 +61,10 @@ const Hero = () => {
               </p>
             </div>
             <div className="mt-5">
-              <Button className="px-8 flex items-center gap-3">
+              <Button
+                onClick={handleBrowseJobsClick}
+                className="px-8 flex items-center gap-3"
+              >
                 Explore <ArrowUpRight size={20} />
               </Button>
             </div>
@@ -58,6 +73,6 @@ const Hero = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Hero

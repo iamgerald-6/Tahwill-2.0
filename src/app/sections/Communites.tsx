@@ -36,15 +36,15 @@ const Communities = () => {
             elevate your well-being.
           </h5>
           <div>
-            <div className="grid grid-cols-2 px-28 mt-10 ">
-              {""}
+            <div className="grid md:grid-cols-2 md:px-28 px-8 mt-10 ">
+              {" "}
               {commArr.map((community, i) => (
                 <div key={community.id} className="border border-white  py-7">
                   <div className="grid gap-1 py-2 px-5">
                     <span className="text-primary-200">0{i + 1}</span>
                     <h3 className="text-white">{community.title}</h3>
                   </div>
-                  <div className="text-white px-5 w-[75%]">
+                  <div className="text-white px-5 md:w-[75%]">
                     <p className="text-sm ">{community.desc}</p>
                   </div>
                 </div>

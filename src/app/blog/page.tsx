@@ -1,7 +1,7 @@
 import React from "react";
 import HeroBlog from "./components/HeroBlog";
 import SearchNav from "./components/SearchNav";
-// import BlogPost from "./components/BlogPost";
+import BlogPost from "./components/BlogPost";
 import MoreBlog from "./components/MoreBlog";
 
 const Blog = () => {
@@ -13,7 +13,10 @@ const Blog = () => {
       <div>
         <SearchNav />
       </div>
-      
+      <div>
+        <BlogPost />
+      </div>
+
       <div>
         <MoreBlog />
       </div>

@@ -5,6 +5,7 @@ import { db } from "@/app/utils/db";
 import { RowDataPacket, ResultSetHeader } from "mysql2/promise";
 import validator from "validator";
 import { verifyToken } from "@/app/utils/jwt";
+import sanitizeHtml from "sanitize-html";
 
 const uploadDir = path.join(
   process.cwd(),
@@ -28,14 +29,11 @@ export async function GET() {
 export async function POST(req: Request) {
   let connection;
   try {
-   
     console.log("Request headers:", req.headers);
 
-  
     const formData = await req.formData();
     console.log("Form data received:", formData);
 
-   
     const authHeader = req.headers.get("authorization");
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return NextResponse.json(
@@ -47,7 +45,6 @@ export async function POST(req: Request) {
     const token = authHeader.split(" ")[1];
     const user = verifyToken(token);
 
-   
     if (!user || typeof user !== "object" || !("id" in user)) {
       return NextResponse.json(
         { message: "Forbidden: Invalid token" },
@@ -55,7 +52,6 @@ export async function POST(req: Request) {
       );
     }
 
-   
     const [rows] = await db.execute<RowDataPacket[]>(
       `SELECT role FROM super_admins WHERE id = ?`,
       [user.id]
@@ -98,8 +94,25 @@ export async function POST(req: Request) {
       }
     }
 
+    // Sanitize instead of escaping
     const sanitizedTitle = validator.escape(title);
-    const sanitizedContent = validator.escape(content);
+    const sanitizedContent = sanitizeHtml(content, {
+      allowedTags: [
+        "p",
+        "strong",
+        "em",
+        "h1",
+        "h2",
+        "h3",
+        "ul",
+        "ol",
+        "li",
+        "a",
+      ],
+      allowedAttributes: {
+        a: ["href", "target"],
+      },
+    });
 
     let imageUrl = null;
     if (coverImage) {
@@ -113,7 +126,6 @@ export async function POST(req: Request) {
     connection = await db.getConnection();
     await connection.beginTransaction();
 
-    
     const [result] = await connection.execute<ResultSetHeader>(
       `INSERT INTO blogs (title, cover_image, content, category, author, status) VALUES (?, ?, ?, ?, ?, ?)`,
       [sanitizedTitle, imageUrl, sanitizedContent, category, author, status]
@@ -130,7 +142,6 @@ export async function POST(req: Request) {
       { status: 201 }
     );
   } catch (error) {
-    
     if (connection) {
       await connection.rollback();
     }
@@ -146,7 +157,6 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   } finally {
-    
     if (connection) {
       connection.release();
     }

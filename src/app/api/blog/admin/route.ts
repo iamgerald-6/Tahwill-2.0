@@ -5,7 +5,6 @@ import { verifyToken } from "@/app/utils/jwt"; // Assuming you have this utility
 
 export async function GET(req: Request) {
   try {
-    // Get the authorization header from the request
     const authHeader = req.headers.get("authorization");
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 403 });

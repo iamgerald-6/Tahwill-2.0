@@ -1,13 +1,19 @@
+"use client"
 import Image from "next/image";
 import { Button } from "../components/Button";
 import { ArrowUpRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 const About = () => {
+  const router = useRouter();
+  const handleBrowseJobsClick = () => {
+    router.push("/service");
+  };
   return (
     <div className="pb-10 pt-20">
       <div className="grid md:grid-cols-3 gap-16 xl:px-24 lg:px-16 px-5   ">
         <div>
           <Image
-            src={"/assets/imagery (3).jpg"}
+            src={"/assets/featured.jpg"}
             alt="about image"
             width={600}
             height={500}
@@ -42,19 +48,27 @@ const About = () => {
               and corporations. From transformative education and
               self-empowerment to strategic wellness consulting and personalized
               health programs, we create meaningful, lasting improvements in
-              overall well-being. 
+              overall well-being.
             </p>
           </div>
           <div className="mt-10">
-<div className="mt-5"><Button className="px-10 text-primary border-primary hover:border-primary-200">     Our Service <ArrowUpRight size={20} /></Button></div>
-          <Image
-            src={"/assets/aboutHome.jpg"}
-            alt="about image"
-            width={600}
+            <div className="mt-5">
+              <Button
+                onClick={handleBrowseJobsClick}
+                className="px-10 text-primary border-primary hover:border-primary-200"
+              >
+                {" "}
+                Our Service <ArrowUpRight size={20} />
+              </Button>
+            </div>
+            <Image
+              src={"/assets/aboutHome.jpg"}
+              alt="about image"
+              width={600}
               height={500}
               className="mt-6"
             />
-            </div>
+          </div>
         </div>
       </div>
     </div>

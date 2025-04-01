@@ -4,39 +4,39 @@ import InputComponent from "@/app/components/Inputs";
 
 import { Button } from "@/app/components/Button";
 const Contact = () => {
-    return (
-      <div className="flex flex-col items-center gap-2   py-24">
-        <div className="w-full flex flex-col items-center">
-          <h3 className="text-6xl text-center bg-gradient-to-r from-primary to-primary-100 bg-clip-text text-transparent inline-block">
-            Stay Updated
-          </h3>
-          <p className="text-center text-sm mt-3">
-            Receive regular updates and valuable insights to support your
-            <br />
-            ongoing wellness journey.
-          </p>
-        </div>
-        <div className="mt-5">
-          <form>
-            <div className="grid">
-              <InputComponent
-                className="border-primary rounded-xl w-[30vw] py-4"
-                type="email"
-                placeholder="Enter your email"
-              />
-            </div>
-            <div className="w-full mt-5 flex flex-col items-center">
-              <Button className=" rounded-xl border border-primary text-primary px-10">
-                Send
-              </Button>
-            </div>
-          </form>
-        </div>
+  return (
+    <div className="flex flex-col items-center gap-2 px-8  py-24">
+      <div className="w-full flex flex-col items-center">
+        <h3 className="text-6xl text-center bg-gradient-to-r from-primary to-primary-100 bg-clip-text text-transparent inline-block">
+          Stay Updated
+        </h3>
+        <p className="text-center text-sm mt-3">
+          Receive regular updates and valuable insights to support your
+          <br />
+          ongoing wellness journey.
+        </p>
       </div>
-    );
-}
+      <div className="mt-5">
+        <form>
+          <div className="grid">
+            <InputComponent
+              className="border-primary rounded-xl md:w-[30vw] w-[50vw] py-4"
+              type="email"
+              placeholder="Enter your email"
+            />
+          </div>
+          <div className="w-full mt-5 flex flex-col items-center">
+            <Button className=" rounded-xl border border-primary text-primary px-10">
+              Send
+            </Button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
 
-export default Contact
+export default Contact;
 
 
 //  <div className="lg:flex mt-20 gap-20 ">

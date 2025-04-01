@@ -5,11 +5,11 @@ const About = () => {
     <>
       <div>
         {/* Hero Section */}
-        <div className="bg-[url(/assets/about.jpg)] bg-cover bg-center rounded-br-[80px] bg-no-repeat h-[75vh] ">
-          <div className="bg-black/60 h-[75vh] w-full rounded-br-[80px]">
+        <div className="bg-[url(/assets/about.jpg)] bg-cover bg-center  bg-no-repeat h-[75vh] ">
+          <div className="bg-black/60 h-[75vh] w-full">
             <div className="flex  items-center justify-center xl:px-24 lg:px-16 px-7 h-[75vh] text-white sm:text-xl   uppercase ">
               <div className="grid">
-                <div className="lg:flex lg:flex-col lg:items-center">
+                <div className="flex flex-col items-center">
                   <p>Know more</p>
                 </div>
                 <div className="text-white xl:text-6xl lg:text-5xl md:text-4xl text-3xl  uppercase mt-8">
@@ -21,15 +21,13 @@ const About = () => {
         </div>
 
         {/* About Section */}
-        <div className="mt-16 pb-10 px-10 grid grid-cols-3 gap-16">
+        <div className="mt-16 pb-10 px-10 grid md:grid-cols-3 gap-16">
           <div>
-            <span className="bg-gradient-to-r from-primary to-primary-100 bg-clip-text text-transparent text-2xl font-semibold">
-              Mission
-            </span>
-            <p className="w-[80%] text-primary text-2xl mt-4 font-medium">
-              We provide expert wellness solutions, corporate programs,
-              sustainable nutrition, and business support to promote lasting
-              health and growth.
+            <span className="text-primary text-3xl font-semibold">Mission</span>
+            <p className="md:w-[80%] text-primary text-lg mt-4 font-medium">
+              We transform wellness in Africa by offering innovative,
+              integrative solutions that nurture holistic health, empower
+              communities, and inspire transformative lifestyles.
             </p>
           </div>
           <div>
@@ -41,20 +39,21 @@ const About = () => {
             />
           </div>
           {/* Stats Section */}
-          <div className="flex flex-col items-center text-center mt-7">
+          <div className="flex flex-col md:items-center md:text-center ">
             <span className="text-primary text-3xl font-semibold">
               Our Vision
             </span>
-            <p className="text-primary text-xl mt-4 max-w-xs">
-              We design personalized wellness solutions, combining science,
-              data, and culture to drive lasting health and well-being for
-              individuals and businesses.
+            <p className="text-primary text-lg mt-4 max-w-xs">
+              Tahwill strives to be Africa&apos;s foremost provider of
+              integrative and preventative wellness solutions, inspiring
+              transformative journeys and fostering holistic well-being across
+              the continent.
             </p>
           </div>
         </div>
 
         {/* About Us Section with Image */}
-        <div className="mt-14  grid grid-cols-2 gap-16 bg-[#E9ECF3]">
+        <div className="mt-14  grid md:grid-cols-2 gap-16 bg-[#E9ECF3]">
           <div>
             <Image
               src={"/assets/problem.png"}
@@ -63,11 +62,11 @@ const About = () => {
               height={500}
             />
           </div>
-          <div className="relative mt-14">
+          <div className="relative md:mt-14 md:px-0 px-8 pb-8">
             <span className="bg-gradient-to-r from-primary to-primary-100 bg-clip-text text-transparent text-2xl font-semibold">
               Problem
             </span>
-            <p className="w-[80%] text-primary text-2xl mt-3 font-medium">
+            <p className="md:w-[80%] text-primary text-lg md:mt-3 font-medium">
               Many individuals and businesses struggle to find personalized,
               effective wellness solutions that address their unique needs.
               Generic approaches often fail to deliver lasting health
@@ -80,7 +79,7 @@ const About = () => {
         </div>
 
         {/* Centered Image & Text Section */}
-        <div className="flex flex-col justify-center items-center h-screen text-center px-6">
+        <div className="flex flex-col justify-center mt-6 items-center text-center px-6">
           {/* Centered Image */}
           <Image
             src="/assets/icons/Tahwil 2.svg"
