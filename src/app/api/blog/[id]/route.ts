@@ -4,10 +4,10 @@ import { RowDataPacket } from "mysql2/promise";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: Record<string, string> }
+  { params }: { params: Promise<Record<string, string>> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     if (isNaN(Number(id))) {
       return NextResponse.json(
