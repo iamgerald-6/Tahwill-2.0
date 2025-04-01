@@ -1,7 +1,5 @@
 "use client";
-
 import { ArrowRight } from "lucide-react";
-
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";

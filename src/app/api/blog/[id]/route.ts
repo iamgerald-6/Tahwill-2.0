@@ -7,10 +7,8 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-   
-    const { id } = await params;
+    const { id } = params;
 
-   
     if (isNaN(Number(id))) {
       return NextResponse.json(
         { message: "Invalid blog ID format" },
