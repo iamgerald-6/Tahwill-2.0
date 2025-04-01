@@ -23,55 +23,55 @@ const About = () => {
         {/* About Section */}
         <div className="mt-16 pb-10 px-10 grid md:grid-cols-3 gap-16">
           <div>
-            <span className="text-primary text-3xl font-semibold">Mission</span>
-            <p className="md:w-[80%] text-primary text-lg mt-4 font-medium">
-              We transform wellness in Africa by offering innovative,
-              integrative solutions that nurture holistic health, empower
-              communities, and inspire transformative lifestyles.
+            <span className="bg-gradient-to-r from-primary to-primary-100 bg-clip-text text-transparent text-2xl font-semibold">
+              Mission
+            </span>
+            <p className="w-[80%] text-primary text-2xl mt-4 font-medium">
+              We provide expert wellness solutions, corporate programs,
+              sustainable nutrition, and business support to promote lasting
+              health and growth.
             </p>
           </div>
-          <div>
+          <div className="flex justify-center">
             <Image
-              src={"/assets/mission.png"}
+              src="/assets/mission.png"
               alt="About Image"
               width={300}
               height={100}
+              className="max-w-full h-auto"
             />
           </div>
           {/* Stats Section */}
-          <div className="flex flex-col md:items-center md:text-center ">
+          <div className="flex flex-col items-center text-center mt-7">
             <span className="text-primary text-3xl font-semibold">
               Our Vision
             </span>
-            <p className="text-primary text-lg mt-4 max-w-xs">
-              Tahwill strives to be Africa&apos;s foremost provider of
-              integrative and preventative wellness solutions, inspiring
-              transformative journeys and fostering holistic well-being across
-              the continent.
+            <p className="text-primary text-xl mt-4 max-w-xs">
+              We design personalized wellness solutions, combining science,
+              data, and culture to drive lasting health and well-being for
+              individuals and businesses.
             </p>
           </div>
         </div>
 
         {/* About Us Section with Image */}
-        <div className="mt-14  grid md:grid-cols-2 gap-16 bg-[#E9ECF3]">
+        <div className="mt-14  grid grid-cols-2 gap-16 bg-[#E9ECF3]">
           <div>
             <Image
-              src={"/assets/problem.png"}
+              src="/assets/problem.png"
               alt="About Image"
               width={600}
               height={500}
+              className="max-w-full h-auto"
             />
           </div>
-          <div className="relative md:mt-14 md:px-0 px-8 pb-8">
+          <div className="relative mt-14">
             <span className="bg-gradient-to-r from-primary to-primary-100 bg-clip-text text-transparent text-2xl font-semibold">
               Problem
             </span>
-            <p className="md:w-[80%] text-primary text-lg md:mt-3 font-medium">
+            <p className="w-[80%] text-primary text-2xl mt-3 font-medium">
               Many individuals and businesses struggle to find personalized,
-              effective wellness solutions that address their unique needs.
-              Generic approaches often fail to deliver lasting health
-              improvements, while businesses lack the right strategies to
-              integrate wellness effectively. Tahwil bridges this gap with
+              effective wellness solutions. Tahwil bridges this gap with
               tailored, data-driven solutions, fostering a connected wellness
               ecosystem across Nigeria and Africa.
             </p>
@@ -79,7 +79,7 @@ const About = () => {
         </div>
 
         {/* Centered Image & Text Section */}
-        <div className="flex flex-col justify-center mt-6 items-center text-center px-6">
+        <div className="flex flex-col justify-center items-center h-screen text-center px-6">
           {/* Centered Image */}
           <Image
             src="/assets/icons/Tahwil 2.svg"
@@ -88,20 +88,13 @@ const About = () => {
             height={300}
             className="max-w-full h-auto mb-6"
           />
-
-          {/* Centered Text */}
           <p className="max-w-2xl text-lg text-gray-700">
             We provide expert wellness solutions tailored for individuals,
-            businesses, and wellness entrepreneurs. Our personalized approach
-            includes health assessments, customized nutrition and fitness plans,
-            and stress management strategies to enhance well-being.
+            businesses, and wellness entrepreneurs.
           </p>
           <p className="max-w-2xl text-lg text-gray-700 mt-6">
             For businesses, we develop workplace wellness programs, conduct
-            productivity assessments, and offer tailored workshops to create
-            healthier, more engaged teams. We also support wellness
-            entrepreneurs with strategic consulting and data-driven growth
-            solutions.
+            productivity assessments, and offer tailored workshops.
           </p>
         </div>
       </div>
