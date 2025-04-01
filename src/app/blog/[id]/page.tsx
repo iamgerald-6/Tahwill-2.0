@@ -2,11 +2,9 @@
 import Image from "next/image";
 import React from "react";
 import { CircleUserRound } from "lucide-react";
-
 import SearchNav from "../components/SearchNav";
 import MoreBlog from "../components/MoreBlog";
 import { useQuery } from "@tanstack/react-query";
-
 import type { BlogDataType } from "../types";
 import moment from "moment";
 import { useParams } from "next/navigation";
