@@ -1,6 +1,6 @@
-"use client"
-import Image from 'next/image';
-import React from 'react'
+"use client";
+import Image from "next/image";
+import React from "react";
 import { CircleUserRound } from "lucide-react";
 
 import SearchNav from "../components/SearchNav";
@@ -15,8 +15,13 @@ import DOMPurify from "dompurify";
 const InnerBlog = () => {
   const { id } = useParams();
   const getBlogData = async () => {
-    const res = await api.get(`${apiRoutes.blog.getBlog}${id}/`);
-    return res.data;
+    const res = await fetch(`/api/blog/${id}`);
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch blog");
+    }
+
+    return res.json();
   };
 
   const { data, isLoading } = useQuery<BlogDataType>({
