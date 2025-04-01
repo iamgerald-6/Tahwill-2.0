@@ -5,11 +5,13 @@ import { useState } from "react";
 import TierOne from "./ModalTierOne";
 import ModalTierTwo from "./ModalTierTwo";
 import ModalThree from "./ModalThree";
+import Community from "@/app/components/Community";
 
 const Featured = () => {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [modal, setModal] = useState(false);
   return (
     <div className="mt-24">
       <div className="bg-[#01051B]">
@@ -26,7 +28,10 @@ const Featured = () => {
               sustainable, optimal health.
             </h3>
             <div>
-              <Button className="bg-white/80 text-primary px-5 transition ease-in-out duration-500 hover:text-white hover:bg-transparent">
+              <Button
+                onClick={() => setModal(true)}
+                className="bg-white/80 text-primary px-5 transition ease-in-out duration-500 hover:text-white hover:bg-transparent"
+              >
                 Join Community
               </Button>
             </div>
@@ -121,6 +126,7 @@ const Featured = () => {
       <TierOne open={open} setOpen={setOpen} />
       <ModalTierTwo open={openModal} setOpen={setOpenModal} />
       <ModalThree open={isOpenModal} setOpen={setIsOpenModal} />
+      <Community open={modal} setOpen={setModal} />
     </div>
   );
 };

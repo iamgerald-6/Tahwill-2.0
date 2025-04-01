@@ -1,12 +1,12 @@
-
 import Image from "next/image";
+import Link from "next/link";
 const Footer = () => {
-    const navArr = [
-      { id: 1, route: "Home" },
-      { id: 2, route: "About" },
-      { id: 3, route: "Service" },
-      { id: 4, route: "Blog" },
-    ];
+  const navArr = [
+    { id: 1, route: "Home" },
+    { id: 2, route: "About" },
+    { id: 3, route: "Service" },
+    { id: 4, route: "Blog" },
+  ];
   return (
     <div>
       <div className="text-primary-400 bg-primary-300 md:px-12 px-10 sm:flex  sm:justify-between py-10 z-50">
@@ -46,39 +46,48 @@ const Footer = () => {
         </div>
         <div className="sm:mt-0 mt-6 sm:ps-0 ps-3">
           <p className="text-primary-400">tahwilsolutions@gmail.com</p>
-          <ul className=" gap-2 flex mt-2">
-            <li>
+          <ul className="flex gap-2">
+            <Link
+              href="https://www.linkedin.com/company/tahwil-solutions/"
+              target="_blank"
+            >
               <Image
                 width={25}
                 height={30}
                 src={"/assets/icons/linkedin (1).svg"}
-                alt="linkedIn"
+                alt="LinkedIn"
               />
-            </li>
-            <li>
+            </Link>
+            <Link
+              href="https://x.com/tahwil_s?s=21&t=r5rVbSc45g0lc4C-E0x4KQ"
+              target="_blank"
+            >
               <Image
                 width={25}
                 height={30}
-                src={"/assets/icons/social.svg"}
-                alt="linkedIn"
+                src={"/assets/icons/twitter.svg"}
+                alt="Twitter (X)"
               />
-            </li>
-            <li>
+            </Link>
+            <Link href="#">
               <Image
                 width={25}
                 height={30}
                 src={"/assets/icons/facebook (3).svg"}
-                alt="linkedIn"
+                alt="Facebook"
               />
-            </li>
-            <li>
+            </Link>
+            <Link
+              href="https://www.instagram.com/tahwil_solutionss?igsh=MTZmbnU0cTJkdzkzZA=="
+              target="_blank"
+            >
               <Image
                 width={25}
                 height={30}
                 src={"/assets/icons/social (1).svg"}
-                alt="linkedIn"
+                alt="Instagram"
               />
-            </li>
+            </Link>
           </ul>
         </div>
       </div>
