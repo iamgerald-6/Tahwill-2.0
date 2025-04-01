@@ -1,6 +1,5 @@
 "use client";
-import apiRoutes from "@/app/apiRoutes";
-import api from "@/app/utils/api";
+
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import type { Blogdata } from "../types";
