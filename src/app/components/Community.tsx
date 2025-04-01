@@ -1,5 +1,3 @@
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/app/components/Button";
 import { Modal } from "@/app/components/Modal";
 
 interface ModalType {
