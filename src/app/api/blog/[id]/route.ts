@@ -3,11 +3,11 @@ import { db } from "@/app/utils/db";
 import { RowDataPacket } from "mysql2/promise";
 
 export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const id = (await params).id;
 
     if (isNaN(Number(id))) {
       return NextResponse.json(
