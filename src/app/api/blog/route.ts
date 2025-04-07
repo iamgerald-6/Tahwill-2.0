@@ -94,7 +94,6 @@ export async function POST(req: Request) {
       }
     }
 
-    // Sanitize instead of escaping
     const sanitizedTitle = validator.escape(title);
     const sanitizedContent = sanitizeHtml(content, {
       allowedTags: [

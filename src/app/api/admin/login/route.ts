@@ -31,11 +31,11 @@ export async function POST(req: Request): Promise<NextResponse> {
         { status: 401 }
       );
     }
-    const token: string = generateToken(admin.id);
+    const token: string = generateToken(admin.id, admin.role);
     return NextResponse.json(
       {
         token,
-        admin: { id: admin.id, email: admin.email, role: admin.role },
+        admin: { id: admin.id, email: admin.email },
       },
       { status: 200 }
     );

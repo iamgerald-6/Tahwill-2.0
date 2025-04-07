@@ -52,6 +52,40 @@
   }
 } */
 
+
+@layer utilities {
+  @keyframes arrow-loop {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    20% {
+      transform: translateX(8px);
+      opacity: 1;
+    }
+    40% {
+      transform: translateX(16px);
+      opacity: 0;
+    }
+    60% {
+      transform: translateX(-16px);
+      opacity: 0;
+    }
+    80% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-arrow-loop {
+    animation: arrow-loop 3s ease-in-out infinite;
+  }
+}
+
 @media (min-width: 400px) {
   .custom-400\:w-425px {
     width: 425px;
