@@ -31,8 +31,8 @@ export async function POST(req: Request) {
   try {
     const data = {
       email,
-      amount: Math.round(amount * 100), // Ensure amount is in kobo (integer)
-      currency: "NGN", // Specify currency if needed
+      amount: Math.round(amount * 100), 
+      currency: "NGN", 
     };
 
     const response = await axios.post(
@@ -46,7 +46,7 @@ export async function POST(req: Request) {
       }
     );
 
-    // More detailed response checking
+    
     if (!response.data.status || response.data.status !== true) {
       console.error("Paystack API Error:", response.data);
       return NextResponse.json(
@@ -71,14 +71,12 @@ export async function POST(req: Request) {
   } catch (error: any) {
     console.error("Error initializing payment:", error);
 
-    // More detailed error response
+  
     let errorMessage = "Internal server error";
     if (error.response) {
-      // The request was made and the server responded with a status code
       console.error("Paystack API response error:", error.response.data);
       errorMessage = error.response.data.message || "Payment processing failed";
     } else if (error.request) {
-      // The request was made but no response was received
       console.error("No response received from Paystack API");
       errorMessage = "No response from payment processor";
     }
