@@ -29,7 +29,7 @@ import Link from "next/link";
 
 const data = [
   { link: "/dashboard", label: "Home", icon: House },
-  { link: "/dashboard/invoice", label: "Transactions", icon: Wallet },
+  { link: "/dashboard/transaction", label: "Transactions", icon: Wallet },
   { link: "/dashboard/blog", label: "Blog", icon: SquarePen },
   { link: "/dashboard/users", label: "Subscribers", icon: MailCheck },
   { link: "", label: "Analytics", icon: ChartPie },

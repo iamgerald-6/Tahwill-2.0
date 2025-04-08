@@ -3,11 +3,9 @@ import { NextResponse } from "next/server";
 import axios from "axios";
 import type { Subscriber } from "../types";
 
-// This function will handle POST requests
 export async function POST(req: Request) {
   try {
-    const { email } = await req.json(); // Get email from the body
-
+    const { email } = await req.json(); 
     const response = await axios.post(
       "https://connect.mailerlite.com/api/subscribers",
       {

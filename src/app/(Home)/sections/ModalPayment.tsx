@@ -22,9 +22,11 @@ const PaymentState = z.object({
 interface ModalType {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  tierName: string;
 }
-const ModalPayment = ({ open, setOpen }: ModalType) => {
+const ModalPayment = ({ open, setOpen, tierName }: ModalType) => {
   type paymentType = z.infer<typeof PaymentState>;
+  console.log(tierName, "testing tiername");
   const {
     register,
     formState: { errors },
@@ -39,30 +41,30 @@ const ModalPayment = ({ open, setOpen }: ModalType) => {
   const CurrencyArr = [{ id: 1, name: "NGN" }];
   const postMail = async (data: paymentType) => {
     const res = await axios.post(apiRoutes.payment.paymentApi, {
-        email: data.email,
-        amount: Number(data.amount),
-        currency: data.currency
-        
+      email: data.email,
+      amount: Number(data.amount),
+      currency: data.currency,
+
+      tier_name: tierName,
     });
     return res.data;
   };
 
- const { mutate, isPending } = useMutation({
-   mutationFn: postMail,
-   onSuccess: (data) => {
-     if (data && data.authorization_url) {
-       toast.success("Payment initialized successfully!");
-       window.location.href = data.authorization_url;
-     } else {
-       toast.error("Unable to initialize payment.");
-     }
-     reset(); // Reset the form
-   },
-   onError: () => {
-     toast.error("An error occurred during payment initialization.");
-   },
- });
-
+  const { mutate, isPending } = useMutation({
+    mutationFn: postMail,
+    onSuccess: (data) => {
+      if (data && data.authorization_url) {
+        toast.success("Payment initialized successfully!");
+        window.location.href = data.authorization_url;
+      } else {
+        toast.error("Unable to initialize payment.");
+      }
+      reset();
+    },
+    onError: () => {
+      toast.error("An error occurred during payment initialization.");
+    },
+  });
 
   const FormSubmit: SubmitHandler<paymentType> = (data) => {
     mutate(data);
@@ -96,12 +98,12 @@ const ModalPayment = ({ open, setOpen }: ModalType) => {
             <h3 className="font-bold text-primary">Currency</h3>
             <Select onValueChange={(val: string) => setValue("currency", val)}>
               <SelectTrigger className="w-[180px] text-sm">
-                <SelectValue placeholder="Select a category" />
+                <SelectValue placeholder="NGN" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel className="text-sm font-semibold uppercase text-primary">
-                    Categories
+                    Currency
                   </SelectLabel>
                   {CurrencyArr.map((item) => (
                     <SelectItem key={item.id} value={item.name}>

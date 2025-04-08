@@ -119,7 +119,10 @@ const ModalTierTwo = ({ open, setOpen }: ModalType) => {
             </ul>
           </div>
           <div className="mt-5">
-            <Button className="bg-primary flex gap-2">
+            <Button
+              onClick={() => setIsOpen(true)}
+              className="bg-primary flex gap-2"
+            >
               Proceed <ArrowRight size={20} className="" />
             </Button>
           </div>

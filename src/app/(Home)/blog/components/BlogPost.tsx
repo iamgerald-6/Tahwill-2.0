@@ -2,8 +2,10 @@
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import type { Blogdata } from "../types";
-// Ensure DOMPurify is imported if not globally available
+
 import DOMPurify from "dompurify";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const BlogPost = () => {
   const getBlogData = async () => {
@@ -69,6 +71,15 @@ const BlogPost = () => {
               <div className="flex flex-col justify-center text-xs">
                 <span>Written By</span>
                 <span>{featuredBlog.author}</span>
+              </div>
+              <div className="mt-7">
+                <Link
+                  href={`/blog/${featuredBlog.id}`}
+                  className="hover:text-primary-200 flex items-center gap-2 "
+                >
+                  Read more{" "}
+                  <ArrowRight size={20} className="hover:text-primary-200" />
+                </Link>
               </div>
             </div>
           </div>
