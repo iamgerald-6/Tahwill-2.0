@@ -1,9 +1,4 @@
-
-import {
-  
-  MantineProvider,
-  mantineHtmlProps,
-} from "@mantine/core";
+import { MantineProvider, mantineHtmlProps } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "../globals.css";
 import ReduxProvider from "../components/Provider";
@@ -24,23 +19,20 @@ export default function AuthLayout({
 }: {
   children: React.ReactNode;
 }) {
-    return (
-      <html lang="en" {...mantineHtmlProps}>
-      
-
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <ReduxProvider>
-            <QueryProvider>
-              <Toaster richColors position="top-center" />
-              <MantineProvider defaultColorScheme="light">
-                {children}
-              </MantineProvider>
-            </QueryProvider>
-          </ReduxProvider>
-        </body>
-      </html>
-    );
+  return (
+    <html lang="en" {...mantineHtmlProps}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ReduxProvider>
+          <QueryProvider>
+            <Toaster richColors position="top-center" />
+            <MantineProvider defaultColorScheme="light">
+              {children}
+            </MantineProvider>
+          </QueryProvider>
+        </ReduxProvider>
+      </body>
+    </html>
+  );
 }
-

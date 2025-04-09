@@ -7,13 +7,14 @@ import {
   Wallet,
   CalendarDays,
   ChartPie,
-  Bell,
+  // Bell,
   Settings,
-  CircleUserRound,
+  // CircleUserRound,
   LogOut,
   SquarePen,
+  MailCheck,
 } from "lucide-react";
-import {Group} from "@mantine/core";
+import { Group } from "@mantine/core";
 
 import classes from "./NavbarSimple.module.css";
 import Image from "next/image";
@@ -26,46 +27,45 @@ import { logout } from "@/app/features/UserSlice";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-
 const data = [
   { link: "/dashboard", label: "Home", icon: House },
-  { link: "/dashboard/invoice", label: "Invoice", icon: Wallet },
+  { link: "/dashboard/transaction", label: "Transactions", icon: Wallet },
   { link: "/dashboard/blog", label: "Blog", icon: SquarePen },
-  { link: "", label: "Booking", icon: CalendarDays },
+  { link: "/dashboard/users", label: "Subscribers", icon: MailCheck },
   { link: "", label: "Analytics", icon: ChartPie },
-  { link: "", label: "Notifications ", icon: Bell },
+  { link: "/dashboard/booking", label: "Booking ", icon: CalendarDays },
   { link: "", label: "Settings", icon: Settings },
 ];
 
 export function NavbarSimple() {
   const [active, setActive] = useState("Billing");
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const postLogout = async () => {
-    const res = await api.post(apiRoutes.Auth.logout)
+    const res = await api.post(apiRoutes.Auth.logout);
     console.log("Logout Response:", res.data);
-    return res.data
-  }
+    return res.data;
+  };
   const { mutate } = useMutation({
     mutationFn: postLogout,
     onSuccess: (data) => {
       if (data) {
-             toast("Successfully logout in");
-             dispatch(logout());
-             router.replace("/login");
-           } else {
-             toast.error("Something Went Wrong");
-           }
-         },
-         onError: (error: any) => {
-           const errorMessage =
-             error?.response?.data?.message ||
-             error?.message ||
-             "An unexpected error occurred";
-     
-           toast.warning(errorMessage);
-         },
-       });
+        toast("Successfully logged Out");
+        dispatch(logout());
+        router.replace("/login");
+      } else {
+        toast.error("Something Went Wrong");
+      }
+    },
+    onError: (error: any) => {
+      const errorMessage =
+        error?.response?.data?.message ||
+        error?.message ||
+        "An unexpected error occurred";
+
+      toast.warning(errorMessage);
+    },
+  });
   const links = data.map((item) => (
     <Link
       className={classes.link}
@@ -75,7 +75,7 @@ export function NavbarSimple() {
       onClick={() => {
         if (!item.link) return;
         setActive(item.label);
-        router.push(item.link); 
+        router.push(item.link);
       }}
     >
       <item.icon className={classes.linkIcon} />
@@ -98,15 +98,6 @@ export function NavbarSimple() {
       </div>
 
       <div className={classes.footer}>
-        <Link
-          href={"#"}
-          className={classes.link}
-          onClick={(event) => event.preventDefault()}
-        >
-          <CircleUserRound className={classes.linkIcon} />
-          <span>Change account</span>
-        </Link>
-
         <span className={classes.link} onClick={() => mutate()}>
           <LogOut className={classes.linkIcon} />
           <span>Logout</span>
