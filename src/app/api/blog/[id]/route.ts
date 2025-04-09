@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import sql from "@/app/utils/db";
 
 interface Blog {
@@ -12,14 +12,15 @@ interface Blog {
 }
 
 export async function GET(
-  _: Request,
+  req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params;
 
-    // Validate ID parameter
-    if (!id || isNaN(Number(id))) {
+    const numericId = Number(id);
+
+    if (isNaN(numericId)) {
       return NextResponse.json(
         { message: "Invalid blog ID format" },
         { status: 400 }
