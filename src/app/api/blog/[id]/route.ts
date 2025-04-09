@@ -1,4 +1,4 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import sql from "@/app/utils/db";
 
 interface Blog {
@@ -12,15 +12,13 @@ interface Blog {
 }
 
 export async function GET(
-  req: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params;
 
-    const numericId = Number(id);
-
-    if (isNaN(numericId)) {
+    if (isNaN(Number(id))) {
       return NextResponse.json(
         { message: "Invalid blog ID format" },
         { status: 400 }
@@ -42,24 +40,29 @@ export async function GET(
       LIMIT 1
     `;
 
+    // Type assertion for the first row
     const blog = result[0] as Blog | undefined;
 
     if (!blog) {
       return NextResponse.json({ message: "Blog not found" }, { status: 404 });
     }
 
-    return NextResponse.json({
-      status: "success",
-      data: {
-        id: blog.id,
-        title: blog.title,
-        coverImage: blog.cover_image,
-        content: blog.content,
-        category: blog.category,
-        author: blog.author,
-        createdAt: blog.created_at.toISOString(),
+    // Format the response
+    return NextResponse.json(
+      {
+        status: "success",
+        data: {
+          id: blog.id,
+          title: blog.title,
+          coverImage: blog.cover_image,
+          content: blog.content,
+          category: blog.category,
+          author: blog.author,
+          createdAt: blog.created_at.toISOString(),
+        },
       },
-    });
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Error fetching blog:", error);
     return NextResponse.json(
