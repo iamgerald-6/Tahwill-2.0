@@ -4,7 +4,19 @@ import { verifyToken } from "./src/app/utils/jwt";
 
 export function middleware(request: NextRequest) {
   const authHeader = request.headers.get("authorization");
-
+  const response = NextResponse.next();
+  response.headers.set(
+    "Access-Control-Allow-Origin",
+    "https://tahwill-2-0-eight.vercel.app"
+  );
+  response.headers.set(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
+  response.headers.set(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization"
+  );
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     if (request.nextUrl.pathname.startsWith("/api")) {
       return NextResponse.json(
@@ -35,8 +47,7 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-// ✅ Protect API & Client-Side Routes
 export const config = {
-  matcher: ["/api/:path*", "/dashboard/:path*"],
+  matcher: ["/api/:path*", "/dashboard/:path*", "/api/admin/login"],
   exclude: ["/api/admin/login"],
 };
