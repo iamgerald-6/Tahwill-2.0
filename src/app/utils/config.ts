@@ -1,9 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-console.log("JWT_SECRET:", process.env.JWT_SECRET);
-console.log("MailerLite API Key:", process.env.MAILERLITE_API_KEY);
-console.log("DATABASE_URL from env:", process.env.DATABASE_URL);
+
 if (!process.env.JWT_SECRET) throw new Error("Missing JWT_SECRET in .env");
 if (!process.env.DATABASE_URL) throw new Error("Missing DB_HOST in .env");
 

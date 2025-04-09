@@ -63,7 +63,7 @@ const Hero = () => {
             <div className="mt-5">
               <Button
                 onClick={handleBrowseJobsClick}
-                className="px-8 flex items-center gap-3"
+                className="px-8 flex items-center gap-3 hover:text-primary-200"
               >
                 Explore <ArrowUpRight size={20} />
               </Button>

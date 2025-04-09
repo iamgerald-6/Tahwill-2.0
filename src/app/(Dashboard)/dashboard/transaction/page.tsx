@@ -35,10 +35,28 @@ const Transaction = () => {
     queryKey: ["subscriberStats"],
     queryFn: getSubs,
   });
-  const chartData = data?.monthlyPayment?.map((item) => ({
-    name: moment(item.month).format("MMMM"),
-    uv: item.amount,
-  }));
+  interface PaymentItem {
+    month: string | Date;
+    amount: number;
+  }
+
+  interface ChartDataItem {
+    name: string;
+    uv: number;
+  }
+  const chartData: ChartDataItem[] =
+    data?.monthlyPayment?.reduce((acc: ChartDataItem[], item: PaymentItem) => {
+      const monthName = moment(item.month).format("MMMM");
+      const existingMonth = acc.find((entry) => entry.name === monthName);
+
+      if (existingMonth) {
+        existingMonth.uv += item.amount;
+      } else {
+        acc.push({ name: monthName, uv: item.amount });
+      }
+
+      return acc;
+    }, []) || [];
   return (
     <div>
       <div className="w-full h-96 p-4">

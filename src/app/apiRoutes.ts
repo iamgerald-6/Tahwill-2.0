@@ -16,4 +16,7 @@ export default {
     paymentApi: "/api/payment",
     getPayment: "/api/getTransaction/",
   },
+  booking: {
+    getBook: "/api/booking/",
+  },
 };

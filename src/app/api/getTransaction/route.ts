@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import sql from "@/app/utils/db";
 import { verifyToken } from "@/app/utils/jwt";
+import moment from "moment";
 
 interface Payment {
   transaction_id: string;
@@ -12,8 +13,9 @@ interface Payment {
   paid_at: Date;
 }
 
-interface MonthlyData {
-  month: string;
+interface MonthlyPayment {
+  month: string; // Format: "YYYY-MM"
+  monthName: string; // "January", "February", etc.
   amount: number;
 }
 
@@ -32,7 +34,7 @@ export async function GET(req: Request) {
       return NextResponse.json({ message: "Forbidden" }, { status: 403 });
     }
 
-    // Fetch all successful payments with type assertion
+    // Fetch successful payments
     const paymentsResult = await sql`
       SELECT * FROM dashboard_tw.payments 
       WHERE status = 'success' 
@@ -40,32 +42,42 @@ export async function GET(req: Request) {
     `;
     const payments = paymentsResult as Payment[];
 
-    // Group by month for analytics
-    const monthlyPayment = payments.reduce((acc, payment) => {
+    // Group by month and sum amounts
+    const monthlyPaymentMap = payments.reduce((acc, payment) => {
       const date = new Date(payment.paid_at);
-      const monthYear = `${date.getFullYear()}-${String(
+      const monthKey = `${date.getFullYear()}-${String(
         date.getMonth() + 1
-      ).padStart(2, "0")}`;
+      ).padStart(2, "0")}`; // "YYYY-MM"
+      const monthName = moment(date).format("MMMM"); // "January", "February", etc.
 
-      if (!acc[monthYear]) {
-        acc[monthYear] = 0;
+      if (!acc[monthKey]) {
+        acc[monthKey] = {
+          month: monthKey,
+          monthName,
+          amount: 0,
+        };
       }
-      acc[monthYear] += payment.amount;
+      acc[monthKey].amount += payment.amount;
 
       return acc;
-    }, {} as Record<string, number>);
+    }, {} as Record<string, MonthlyPayment>);
 
-    const monthlyData: MonthlyData[] = Object.entries(monthlyPayment).map(
-      ([month, amount]) => ({
-        month,
-        amount,
-      })
+    // Convert to array and sort by month (newest first)
+    const monthlyPayment = Object.values(monthlyPaymentMap).sort(
+      (a, b) => new Date(b.month).getTime() - new Date(a.month).getTime()
+    );
+
+    // Calculate TOTAL AMOUNT across all months (sum of all payments)
+    const totalAmount = payments.reduce(
+      (sum, payment) => sum + payment.amount,
+      0
     );
 
     return NextResponse.json(
       {
         transactions: payments,
-        monthlyPayment: monthlyData,
+        monthlyPayment,
+        totalAmount,
       },
       { status: 200 }
     );
