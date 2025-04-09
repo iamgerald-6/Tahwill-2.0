@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
-import { db } from "@/app/utils/db";
+import sql from "@/app/utils/db";
 import { verifyToken } from "@/app/utils/jwt";
-import {ResultSetHeader } from "mysql2/promise";
+
+interface DeletedBlog {
+  id: number;
+}
 
 export async function DELETE(
   req: Request,
   { params }: { params: { id: string } }
 ): Promise<NextResponse> {
-  let connection;
   try {
     const blogId = parseInt(params.id);
     if (isNaN(blogId)) {
@@ -29,17 +31,15 @@ export async function DELETE(
       );
     }
 
-    connection = await db.getConnection();
-    await connection.beginTransaction();
+    const result = await sql`
+      DELETE FROM dashboard_tw.blogs 
+      WHERE id = ${blogId}
+      RETURNING id
+    `;
 
-    const [result] = await connection.execute<ResultSetHeader>(
-      "DELETE FROM blogs WHERE id = ?",
-      [blogId]
-    );
+    const deletedBlog = result[0] as DeletedBlog | undefined;
 
-    await connection.commit();
-
-    if (result.affectedRows === 0) {
+    if (!deletedBlog) {
       return NextResponse.json(
         { message: "Blog not found or already deleted" },
         { status: 404 }
@@ -47,15 +47,20 @@ export async function DELETE(
     }
 
     return NextResponse.json(
-      { message: "Blog deleted successfully" },
+      {
+        message: "Blog deleted successfully",
+        deletedId: deletedBlog.id,
+      },
       { status: 200 }
     );
   } catch (error) {
-    if (connection) await connection.rollback();
-    const err = error as Error;
-    console.error("Error deleting blog:", err.message);
-    return NextResponse.json({ message: "Server error" }, { status: 500 });
-  } finally {
-    if (connection) connection.release();
+    console.error("Error deleting blog:", error);
+    return NextResponse.json(
+      {
+        message: "Server error",
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
   }
 }

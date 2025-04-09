@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
-import { db } from "@/app/utils/db";
-import { RowDataPacket, ResultSetHeader } from "mysql2/promise";
+import sql from "@/app/utils/db";
 import validator from "validator";
 import { verifyToken } from "@/app/utils/jwt";
 import sanitizeHtml from "sanitize-html";
@@ -12,30 +11,73 @@ const uploadDir = path.join(
   process.env.UPLOAD_DIR || "public/uploads"
 );
 
+interface Blog {
+  id: number;
+  title: string;
+  cover_image: string | null;
+  content: string;
+  category: string;
+  author: string;
+  created_at: Date;
+  status: string;
+}
+
+interface SuperAdmin {
+  id: number;
+  role: string;
+}
+
+interface BlogInsertResult {
+  id: number;
+}
+
 export async function GET() {
   try {
-    const [blogs] = await db.execute<RowDataPacket[]>(
-      `SELECT id, title, cover_image, content, category, author, created_at 
-       FROM blogs WHERE status = 'published' ORDER BY created_at DESC`
-    );
+    // Fetch published blogs
+    const result = await sql`
+      SELECT 
+        id, 
+        title, 
+        cover_image, 
+        content, 
+        category, 
+        author, 
+        created_at
+      FROM dashboard_tw.blogs 
+      WHERE status = 'published' 
+      ORDER BY created_at DESC
+    `;
 
-    return NextResponse.json({ status: "success", blogs }, { status: 200 });
+    const blogs = result as Blog[];
+
+    const formattedBlogs = blogs.map((blog) => ({
+      ...blog,
+      created_at: blog.created_at.toISOString(),
+    }));
+
+    return NextResponse.json(
+      { status: "success", blogs: formattedBlogs },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Error fetching blogs:", error);
-    return NextResponse.json({ message: "Server error" }, { status: 500 });
+    return NextResponse.json(
+      {
+        message: "Server error",
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
   }
 }
 
 export async function POST(req: Request) {
-  let connection;
   try {
-    console.log("Request headers:", req.headers);
-
     const formData = await req.formData();
-    console.log("Form data received:", formData);
 
+    // Authentication
     const authHeader = req.headers.get("authorization");
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    if (!authHeader?.startsWith("Bearer ")) {
       return NextResponse.json(
         { message: "Unauthorized: No token provided" },
         { status: 401 }
@@ -43,27 +85,30 @@ export async function POST(req: Request) {
     }
 
     const token = authHeader.split(" ")[1];
-    const user = verifyToken(token);
+    const user = verifyToken(token) as { id?: number } | null;
 
-    if (!user || typeof user !== "object" || !("id" in user)) {
+    // Authorization
+    if (!user?.id) {
       return NextResponse.json(
         { message: "Forbidden: Invalid token" },
         { status: 403 }
       );
     }
 
-    const [rows] = await db.execute<RowDataPacket[]>(
-      `SELECT role FROM super_admins WHERE id = ?`,
-      [user.id]
-    );
+    // Check super admin role with type assertion
+    const adminResult = await sql`
+      SELECT role FROM dashboard_tw.super_admins WHERE id = ${user.id}
+    `;
+    const admin = adminResult[0] as SuperAdmin | undefined;
 
-    if (!rows.length || rows[0].role !== "super_admin") {
+    if (!admin || admin.role !== "super_admin") {
       return NextResponse.json(
-        { message: "Forbidden: You must be a super_admin to create a blog" },
+        { message: "Forbidden: Requires super_admin role" },
         { status: 403 }
       );
     }
 
+    // Form data processing
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
     const category = formData.get("category") as string;
@@ -71,6 +116,7 @@ export async function POST(req: Request) {
     const status = (formData.get("status") as string) || "draft";
     const coverImage = formData.get("cover_image") as File | null;
 
+    // Validation
     if (!title || !content || !author) {
       return NextResponse.json(
         { message: "Missing required fields" },
@@ -78,22 +124,24 @@ export async function POST(req: Request) {
       );
     }
 
+    // File validation
     if (coverImage) {
       const allowedMimeTypes = ["image/jpeg", "image/png"];
       if (!allowedMimeTypes.includes(coverImage.type)) {
         return NextResponse.json(
-          { message: "Invalid file type. Only JPEG and PNG are allowed." },
+          { message: "Invalid file type. Only JPEG/PNG allowed" },
           { status: 400 }
         );
       }
       if (coverImage.size > 5 * 1024 * 1024) {
         return NextResponse.json(
-          { message: "File size too large. Maximum size is 5MB." },
+          { message: "File size exceeds 5MB limit" },
           { status: 400 }
         );
       }
     }
 
+    // Sanitization
     const sanitizedTitle = validator.escape(title);
     const sanitizedContent = sanitizeHtml(content, {
       allowedTags: [
@@ -108,11 +156,10 @@ export async function POST(req: Request) {
         "li",
         "a",
       ],
-      allowedAttributes: {
-        a: ["href", "target"],
-      },
+      allowedAttributes: { a: ["href", "target"] },
     });
 
+    // File upload
     let imageUrl = null;
     if (coverImage) {
       const buffer = Buffer.from(await coverImage.arrayBuffer());
@@ -122,42 +169,32 @@ export async function POST(req: Request) {
       imageUrl = `/uploads/${fileName}`;
     }
 
-    connection = await db.getConnection();
-    await connection.beginTransaction();
-
-    const [result] = await connection.execute<ResultSetHeader>(
-      `INSERT INTO blogs (title, cover_image, content, category, author, status) VALUES (?, ?, ?, ?, ?, ?)`,
-      [sanitizedTitle, imageUrl, sanitizedContent, category, author, status]
-    );
-
-    await connection.commit();
+    // Database insert with type assertion
+    const insertResult = await sql`
+      INSERT INTO dashboard_tw.blogs 
+        (title, cover_image, content, category, author, status)
+      VALUES 
+        (${sanitizedTitle}, ${imageUrl}, ${sanitizedContent}, ${category}, ${author}, ${status})
+      RETURNING id
+    `;
+    const newBlog = insertResult[0] as BlogInsertResult;
 
     return NextResponse.json(
       {
         status: "success",
         message: "Blog created!",
-        data: { blogId: result.insertId },
+        data: { blogId: newBlog.id },
       },
       { status: 201 }
     );
   } catch (error) {
-    if (connection) {
-      await connection.rollback();
-    }
-
-    const err = error as Error;
-    console.error("Error creating blog:", {
-      error: err.message,
-      stack: err.stack,
-      timestamp: new Date().toISOString(),
-    });
+    console.error("Error creating blog:", error);
     return NextResponse.json(
-      { message: "Server error", error: err.message },
+      {
+        message: "Server error",
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
       { status: 500 }
     );
-  } finally {
-    if (connection) {
-      connection.release();
-    }
   }
 }

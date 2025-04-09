@@ -70,7 +70,7 @@ const Subscribers = () => {
             </AreaChart>
           </ResponsiveContainer>
         </div>
-        <div className='px-10 mt-10 '>
+        <div className="px-10 mt-10 ">
           <Table className=" shadow border rounded-lg mt-3 ">
             <TableHeader>
               <TableRow>
@@ -100,7 +100,7 @@ const Subscribers = () => {
               <TableRow>
                 <TableCell colSpan={3}>Total</TableCell>
                 <TableCell className="text-right font-semibold">
-                  {data?.subscribers.length}
+                  {data?.subscribers?.length}
                 </TableCell>
               </TableRow>
             </TableFooter>

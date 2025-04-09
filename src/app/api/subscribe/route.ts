@@ -1,13 +1,10 @@
-// src/app/api/subscribe/route.ts
 import { NextResponse } from "next/server";
 import axios from "axios";
 import type { Subscriber } from "../types";
 
-// This function will handle POST requests
 export async function POST(req: Request) {
   try {
-    const { email } = await req.json(); // Get email from the body
-
+    const { email } = await req.json();
     const response = await axios.post(
       "https://connect.mailerlite.com/api/subscribers",
       {
@@ -47,7 +44,7 @@ export async function GET() {
     const subscribers = response.data.data;
     const monthFormatter = new Intl.DateTimeFormat("en-US", { month: "long" });
     const monthCounts: Record<string, number> = {};
-    subscribers.forEach((s:Subscriber) => {
+    subscribers.forEach((s: Subscriber) => {
       const month = monthFormatter.format(new Date(s.created_at));
       monthCounts[month] = (monthCounts[month] || 0) + 1;
     });
@@ -56,7 +53,7 @@ export async function GET() {
       month,
       count,
     }));
-    return NextResponse.json({subscribers, monthlyData }, { status: 200 });
+    return NextResponse.json({ subscribers, monthlyData }, { status: 200 });
   } catch (error) {
     console.error("Error fetching subscribers:", error);
     return NextResponse.json(

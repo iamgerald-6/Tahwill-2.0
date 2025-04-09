@@ -1,18 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const { email, amount } = await req.json();
+  const { email, amount, tier_name } = await req.json();
 
-  // Validate inputs more thoroughly
-  if (!email || !amount) {
+  if (!email || !amount || !tier_name) {
     return NextResponse.json(
-      { message: "Email and amount are required" },
+      { message: "Email, amount, and tier name are required" },
       { status: 400 }
     );
   }
 
-  // Validate email format
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json(
       { message: "Please provide a valid email address" },
@@ -20,7 +19,6 @@ export async function POST(req: Request) {
     );
   }
 
-  // Validate amount is a positive number
   if (isNaN(amount) || amount <= 0) {
     return NextResponse.json(
       { message: "Please provide a valid positive amount" },
@@ -31,8 +29,11 @@ export async function POST(req: Request) {
   try {
     const data = {
       email,
-      amount: Math.round(amount * 100), 
-      currency: "NGN", 
+      amount: Math.round(amount * 100),
+      currency: "NGN",
+      metadata: {
+        tier_name,
+      },
     };
 
     const response = await axios.post(
@@ -46,8 +47,7 @@ export async function POST(req: Request) {
       }
     );
 
-    
-    if (!response.data.status || response.data.status !== true) {
+    if (!response.data.status) {
       console.error("Paystack API Error:", response.data);
       return NextResponse.json(
         {
@@ -67,11 +67,9 @@ export async function POST(req: Request) {
       },
       { status: 200 }
     );
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error("Error initializing payment:", error);
 
-  
     let errorMessage = "Internal server error";
     if (error.response) {
       console.error("Paystack API response error:", error.response.data);

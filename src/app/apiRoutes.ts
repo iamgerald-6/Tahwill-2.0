@@ -14,5 +14,6 @@ export default {
   },
   payment: {
     paymentApi: "/api/payment",
+    getPayment: "/api/getTransaction/",
   },
 };
