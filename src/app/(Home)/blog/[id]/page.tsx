@@ -49,16 +49,16 @@ const InnerBlog = () => {
       </div>
       <div className="text-primary  md:px-28 px-6 mt-6 ">
         <h4 className="bg-gradient-to-r from-primary to-primary-100 bg-clip-text text-transparent inline-block">
-          {data?.blog.category}
+          {data?.blog?.category}
         </h4>
-        <h2 className="text-3xl mt-3">{data?.blog.title}</h2>
+        <h2 className="text-3xl mt-3">{data?.blog?.title}</h2>
         <div>
           <div className="flex justify-between items-center gap-2 md:w-[70%]">
             <div className="flex gap-3">
               <CircleUserRound />
               <div className="flex flex-col justify-center text-xs">
                 <span>Written By</span>
-                <span>{data?.blog.author}</span>
+                <span>{data?.blog?.author}</span>
               </div>
             </div>
             <div className="flex flex-col text-xs">
@@ -74,7 +74,7 @@ const InnerBlog = () => {
       <div
         className=" mt-3 text-primary px-5"
         dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(data?.blog?.content || "")
+          __html: DOMPurify.sanitize(data?.blog?.content || ""),
         }}
       />
 
