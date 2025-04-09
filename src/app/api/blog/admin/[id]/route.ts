@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import sql from "@/app/utils/db";
 import { verifyToken } from "@/app/utils/jwt";
 
@@ -7,11 +7,13 @@ interface DeletedBlog {
 }
 
 export async function DELETE(
-  req: Request,
-  { params }: { params: { id: string } }
-): Promise<NextResponse> {
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const blogId = parseInt(params.id);
+    const { id } = await params;
+
+    const blogId = parseInt(id);
     if (isNaN(blogId)) {
       return NextResponse.json({ message: "Invalid blog ID" }, { status: 400 });
     }
