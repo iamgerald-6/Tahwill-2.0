@@ -11,9 +11,12 @@ interface Blog {
   created_at: Date;
 }
 
-export async function GET(_: Request, { params }: { params: { id: string } }) {
+export async function GET(
+  _: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const id = params.id;
+    const { id } = await params;
 
     // Validate ID parameter
     if (!id || isNaN(Number(id))) {
