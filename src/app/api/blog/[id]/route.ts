@@ -11,14 +11,14 @@ interface Blog {
   created_at: Date;
 }
 
+// Correct GET signature
 export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-): Promise<NextResponse> {
+  req: NextRequest,
+  context: { params: { id: string } }
+) {
   try {
-    const { id } = params;
+    const { id } = context.params;
 
-    // Validate ID parameter
     if (isNaN(Number(id))) {
       return NextResponse.json(
         { message: "Invalid blog ID format" },
@@ -41,14 +41,12 @@ export async function GET(
       LIMIT 1
     `;
 
-    // Type assertion for the first row
     const blog = result[0] as Blog | undefined;
 
     if (!blog) {
       return NextResponse.json({ message: "Blog not found" }, { status: 404 });
     }
 
-    // Format the response
     return NextResponse.json(
       {
         status: "success",
