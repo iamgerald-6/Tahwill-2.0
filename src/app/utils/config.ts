@@ -12,6 +12,7 @@ export const UPLOAD_DIR = process.env.UPLOAD_DIR as string;
 export const MAILERLITE_API_KEY = process.env.MAILERLITE_API_KEY as string;
 export const PUBLIC_PAYSTACK_KEY = process.env.PUBLIC_PAYSTACK_KEY as string;
 export const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY as string;
+export const EMAIL_SERVICE = process.env.EMAIL_SERVICE as string;
 export const EMAIL_USER = process.env.EMAIL_USER as string;
 export const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD as string;
 export const EMAIL_FROM = process.env.EMAIL_FROM as string;
