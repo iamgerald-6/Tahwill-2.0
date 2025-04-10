@@ -55,7 +55,7 @@ const About = () => {
         </div>
 
         {/* About Us Section with Image */}
-        <div className="mt-14  grid grid-cols-2 gap-16 bg-[#E9ECF3]">
+        <div className="mt-14  grid md:grid-cols-2 gap-16 bg-[#E9ECF3]">
           <div>
             <Image
               src="/assets/problem.png"
@@ -65,11 +65,11 @@ const About = () => {
               className="max-w-full h-auto"
             />
           </div>
-          <div className="relative mt-14">
+          <div className="relative md:mt-14 mt-3 md:px-0 px-5">
             <span className="bg-gradient-to-r from-primary to-primary-100 bg-clip-text text-transparent text-2xl font-semibold">
               Problem
             </span>
-            <p className="w-[80%] text-primary text-2xl mt-3 font-medium">
+            <p className="md:w-[80%] text-primary text-2xl mt-3 font-medium">
               Many individuals and businesses struggle to find personalized,
               effective wellness solutions. Tahwil bridges this gap with
               tailored, data-driven solutions, fostering a connected wellness

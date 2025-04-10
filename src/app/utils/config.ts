@@ -15,3 +15,4 @@ export const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY as string;
 export const EMAIL_USER = process.env.EMAIL_USER as string;
 export const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD as string;
 export const EMAIL_FROM = process.env.EMAIL_FROM as string;
+export const NEXT_PUBLIC_URL = process.env.NEXT_PUBLIC_URL as string;

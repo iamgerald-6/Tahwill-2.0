@@ -14,10 +14,7 @@ export interface BlogArr {
 }
     
 
-export interface BlogDataType {
-    status: boolean,
-    blog: BlogObjectType
-}
+
 export interface BlogObjectType {
   id: number;
   title: string;
