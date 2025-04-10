@@ -44,7 +44,13 @@ const Hero = () => {
             <div className="text-white  lg:text-7xl md:text-5xl text-4xl ">
               <p>
                 Transform Your <br />
-                <span className="bg-gradient-to-r from-primary via-primary-100 to-primary-200 bg-clip-text text-transparent">
+                <span
+                  style={{
+                    WebkitBackgroundClip: "text", // For Safari
+                    WebkitTextFillColor: "transparent", // For Safari
+                  }}
+                  className="bg-gradient-to-r from-primary via-primary-100 to-primary-200 bg-clip-text text-transparent"
+                >
                   Wellness
                 </span>{" "}
                 Journey
@@ -63,7 +69,7 @@ const Hero = () => {
             <div className="mt-5">
               <Button
                 onClick={handleBrowseJobsClick}
-                className="px-8 flex items-center gap-3 hover:text-primary-200"
+                className="px-8 flex items-center gap-3 border-2 border-primary hover:text-primary"
               >
                 Explore <ArrowUpRight size={20} />
               </Button>
