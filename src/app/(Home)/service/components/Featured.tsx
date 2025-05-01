@@ -2,15 +2,16 @@
 import { Button } from "@/app/components/Button";
 import Image from "next/image";
 import { useState } from "react";
-import TierOne from "./ModalTierOne";
-import ModalTierTwo from "./ModalTierTwo";
-import ModalThree from "./ModalThree";
+// import TierOne from "./ModalTierOne";
+// import ModalTierTwo from "./ModalTierTwo";
+// import ModalThree from "./ModalThree";
 import Community from "@/app/components/Community";
+import BookAppointment from "../../sections/BookAppointment";
 
 const Featured = () => {
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  // const [isOpenModal, setIsOpenModal] = useState(false);
   const [modal, setModal] = useState(false);
   return (
     <div className="mt-24">
@@ -40,21 +41,22 @@ const Featured = () => {
             <div className="md:flex md:justify-between md:items-center md:px-16 px-6 text-white py-20 border-t border-gray-100  gap-16 ">
               <div className="w-10 text-lg ">01</div>
               <div className=" md:col-span-2  px-5 py-3 bg-primary/15 rounded-lg">
-                <h2 className="text-4xl mt-3">Basic Consultation</h2>
+                <h2 className="text-4xl mt-3">
+                  Wellness Education and Empowerment
+                </h2>
                 <p className="text-sm md:w-[70%] mt-3">
-                  Basic Consultation is ideal for small businesses or startups
-                  seeking actionable advice and quick solutions to overcome
-                  challenges or identify opportunities without a long-term
-                  commitment.
+                  We deliver wellness education programs that empower
+                  individuals and organizations to build balanced, sustainable
+                  lives through workshops, webinars, and online resources
                 </p>
-                <div className="mt-3">
+                {/* <div className="mt-3">
                   <Button
                     onClick={() => setOpen(true)}
                     className="bg-white/80 text-primary px-5 transition ease-in-out duration-500 hover:text-white hover:bg-transparent"
                   >
                     Book now
                   </Button>
-                </div>
+                </div> */}
               </div>
               <div>
                 <Image
@@ -69,21 +71,21 @@ const Featured = () => {
               <div className="w-10 text-lg ">02</div>
               <div className=" md:col-span-2  px-5 py-3 bg-primary/15 rounded-lg">
                 <h2 className="text-4xl mt-3">
-                  Full-Scale Business Development
+                  Business Development Consulting for Wellness Entrepreneurs
                 </h2>
                 <p className="text-sm md:w-[70%] mt-3">
-                  This offers comprehensive support for businesses looking to
-                  scale, refine operations, and expand their market with a
-                  strategic, hands-on approach for long-term success.
+                  We help wellness entrepreneurs and businesses build
+                  sustainable, high-impact ventures through strategic consulting
+                  in branding, marketing, operations, and growth.
                 </p>
-                <div className="mt-3">
+                {/* <div className="mt-3">
                   <Button
                     onClick={() => setOpenModal(true)}
                     className="bg-white/80 text-primary px-5 transition ease-in-out duration-500 hover:text-white hover:bg-transparent"
                   >
                     Book now
                   </Button>
-                </div>
+                </div> */}
               </div>
               <div>
                 <Image
@@ -97,19 +99,81 @@ const Featured = () => {
             <div className="md:flex md:justify-between md:items-center md:px-16 px-6 text-white py-20 border-t border-gray-100  gap-16 ">
               <div className="w-10 text-lg ">03</div>
               <div className=" md:col-span-2  px-5 py-3 bg-primary/15 rounded-lg">
-                <h2 className="text-4xl mt-3">Long-Term Partnership</h2>
+                <h2 className="text-4xl mt-3">
+                  Tailored Individual Wellness Programs
+                </h2>
                 <p className="text-sm md:w-[70%] mt-3">
-                  Long-Term Partnership provides ongoing strategic collaboration
-                  to drive sustained growth, innovation, and leadership.
+                  Our personalized wellness plans use data-driven and culturally
+                  relevant guidance to support holistic health across nutrition,
+                  fitness, mental well-being, and lifestyle.
                 </p>
-                <div className="mt-3">
+                {/* <div className="mt-3">
                   <Button
                     onClick={() => setIsOpenModal(true)}
                     className="bg-white/80 text-primary px-5 transition ease-in-out duration-500 hover:text-white hover:bg-transparent"
                   >
                     Book now
                   </Button>
-                </div>
+                </div> */}
+              </div>
+              <div>
+                <Image
+                  src={"/assets/about-home.png"}
+                  alt="featured image1"
+                  width={250}
+                  height={500}
+                />
+              </div>
+            </div>
+            <div className="md:flex md:justify-between md:items-center md:px-16 px-6 text-white py-20 border-t border-gray-100  gap-16 ">
+              <div className="w-10 text-lg ">04</div>
+              <div className=" md:col-span-2  px-5 py-3 bg-primary/15 rounded-lg">
+                <h2 className="text-4xl mt-3">Corporate Wellness Programs</h2>
+                <p className="text-sm md:w-[70%] mt-3">
+                  We work with organizations to develop custom workplace
+                  wellness programs that improve employee health, engagement,
+                  and performance.
+                </p>
+                {/* <div className="mt-3">
+                  <Button
+                    onClick={() => setIsOpenModal(true)}
+                    className="bg-white/80 text-primary px-5 transition ease-in-out duration-500 hover:text-white hover:bg-transparent"
+                  >
+                    Book now
+                  </Button>
+                </div> */}
+              </div>
+              <div>
+                <Image
+                  src={"/assets/about-home.png"}
+                  alt="featured image1"
+                  width={250}
+                  height={500}
+                />
+              </div>
+            </div>
+            <div className="md:flex md:justify-between md:items-center md:px-16 px-6 text-white py-20 border-t border-gray-100  gap-16 ">
+              <div className="w-10 text-lg ">05</div>
+              <div className=" md:col-span-2  px-5 py-3 bg-primary/15 rounded-lg">
+                <h2 className="text-4xl mt-3">
+                  Wellness Ecosystem Development
+                </h2>
+                <p className="text-sm md:w-[70%] mt-3">
+                  We are building a vibrant, interconnected wellness ecosystem
+                  that brings together a diverse network of vetted and licensed
+                  wellness professionals, including nutritionists, therapists,
+                  fitness coaches, health and life coaches, naturopaths, herbal
+                  medicine practitioners, holistic health practitioners, and
+                  organic farm-to-table supply chains.
+                </p>
+                {/* <div className="mt-3">
+                  <Button
+                    onClick={() => setIsOpenModal(true)}
+                    className="bg-white/80 text-primary px-5 transition ease-in-out duration-500 hover:text-white hover:bg-transparent"
+                  >
+                    Book a Consultation
+                  </Button>
+                </div> */}
               </div>
               <div>
                 <Image
@@ -121,11 +185,20 @@ const Featured = () => {
               </div>
             </div>
           </div>
+          <div className="mt-3 flex justify-center">
+            <Button
+              onClick={() => setOpenModal(true)}
+              className="bg-white/80 text-primary px-5 transition ease-in-out duration-500 hover:text-white hover:bg-transparent"
+            >
+              Book a Consultation
+            </Button>
+          </div>
         </div>
       </div>
-      <TierOne open={open} setOpen={setOpen} />
+      {/* <TierOne open={open} setOpen={setOpen} />
       <ModalTierTwo open={openModal} setOpen={setOpenModal} />
-      <ModalThree open={isOpenModal} setOpen={setIsOpenModal} />
+      <ModalThree open={isOpenModal} setOpen={setIsOpenModal} /> */}
+      <BookAppointment open={openModal} setOpen={setOpenModal} />
       <Community open={modal} setOpen={setModal} />
     </div>
   );

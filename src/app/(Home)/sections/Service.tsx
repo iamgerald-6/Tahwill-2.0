@@ -21,7 +21,7 @@ const Service = () => {
   //   },
   // ];
   return (
-    <div className="lg:flex mt-20 gap-20 ">
+    <div className="lg:flex mt-20 gap-20 px-28">
       <p className=" md:text-6xl text-5xl  text-primary px-7 md:px-0">
         Why
         <br className="lg:block hidden" /> Choose
@@ -29,19 +29,19 @@ const Service = () => {
       </p>
       <div className="md:block hidden">
         <div className="border-b border-b-primary-400 py-14 text-primary flex justify-between">
-          <span className="text-4xl uppercase">
-            Wellness Education and
-            <br /> Empowerment
+          <span className="text-3xl uppercase">
+            Wellness Education <br />
+            and Empowerment
           </span>
-          <span className="text-2xl w-[50%]">
+          <span className="text-xl w-[50%]">
             At Tahwil, we provide workshops, webinars, corporate training,
             <br /> and resources on wellness, mental health, nutrition, and
             personal growth.
           </span>
         </div>
         <div className="border-b border-b-primary-400 py-14 text-primary flex justify-between">
-          <span className="text-4xl uppercase">Wellness Consulting</span>
-          <span className="text-2xl w-[50%]">
+          <span className="text-3xl uppercase">Wellness Consulting</span>
+          <span className="text-xl w-[50%]">
             We offer personalized wellness consulting, corporate wellness
             programs, business development for wellness brands,
             <br /> and partnership facilitation to foster a thriving wellness
@@ -49,8 +49,8 @@ const Service = () => {
           </span>
         </div>
         <div className="border-b border-b-primary-400 py-14 text-primary flex justify-between">
-          <span className="text-4xl uppercase">Wellness Programs</span>
-          <span className="text-2xl w-[50%]">
+          <span className="text-3xl uppercase">Wellness Programs</span>
+          <span className="text-xl w-[50%]">
             We provide personalized wellness programs, corporate wellness
             initiatives, and specialized services, including nutrition and
             fitness plans, mental health support, stress reduction retreats, and

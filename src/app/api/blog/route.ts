@@ -95,7 +95,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // Check super admin role with type assertion
+    //  super admin role with type assertion
     const adminResult = await sql`
       SELECT role FROM dashboard_tw.super_admins WHERE id = ${user.id}
     `;
