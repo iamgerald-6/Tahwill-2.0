@@ -49,10 +49,10 @@ export function Modal({
   const matches = useMediaQuery("(min-width: 300px)");
 
   const width = {
-    sm: "xl:w-3/5 lg:w-4/5", // Increased width
-    md: "xl:w-4/5 lg:w-5/6",
-    lg: "md:w-5/6",
-    xl: "md:w-[90%]",
+    sm: "md:w-4/5 lg:w-[90%] xl:w-[95%]",
+    md: "md:w-5/6 lg:w-[90%] xl:w-[95%]",
+    lg: "md:w-[90%] lg:w-[95%] xl:w-[96%]",
+    xl: "md:w-[95%] lg:w-[96%] xl:w-[98%]",
   };
   const selectedWidth = width[size];
 

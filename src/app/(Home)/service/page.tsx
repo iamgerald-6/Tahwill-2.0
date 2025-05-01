@@ -1,6 +1,6 @@
 import React from 'react'
 import HeroService from "./components/HeroService";
-import WhatweDo from "./components/WhatweDo";
+// import WhatweDo from "./components/WhatweDo";
 import Featured from "./components/Featured";
 import Contact from "../sections/Contact";
 
@@ -10,9 +10,9 @@ const Service = () => {
       <div>
         <HeroService />
       </div>
-      <div>
+      {/* <div>
         <WhatweDo />
-      </div>
+      </div> */}
       <div>
         <Featured />
       </div>

@@ -38,40 +38,43 @@ const Hero = () => {
         minHeight: "100vh",
       }}
     >
-      <div className="bg-black/60  min-h-[100vh] w-full">
-        <div className="flex md:px-20 md:pt-42 pt-34 px-8 min-h-[100vh]  text-white">
-          <div className="">
-            <div className="text-white  lg:text-7xl md:text-5xl text-4xl ">
-              <p>
-                Transform Your <br />
+      <div className="bg-black/70  min-h-[100vh] w-full">
+        <div className="  md:flex md:flex-col md:items-center md:px-20 md:pt-42 pt-34 px-8 min-h-[100vh]  text-white">
+          <div className=" ">
+            <div className="text-white lg:text-5xl md:text-5xl text-4xl ">
+              <p className="uppercase">
+                Transform Your.
                 <span
                   style={{
-                    WebkitBackgroundClip: "text", // For Safari
-                    WebkitTextFillColor: "transparent", // For Safari
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
                   }}
                   className="bg-gradient-to-r from-primary via-primary-100 to-primary-200 bg-clip-text text-transparent"
                 >
-                  Wellness
+                  {" "}
+                  Health.
                 </span>{" "}
-                Journey
+                <br />
+                Build Impact. Thrive, Together
               </p>
             </div>
-            <div className="font-medium mt-5 ">
-              <p>
-                Personalized, data-driven, and culturally inspired wellness
-                <br className="hidden md:block" />
-                solutions for individuals, businesses, and corporations.
-                <br className="hidden md:block" /> Be part of our interconnected
-                ecosystem and achieve lasting,
-                <br className="hidden md:block" /> optimal health.
+            <div className="font-medium mt-5  ">
+              <p className="">
+                Whether you’re on a personal journey to optimize your
+                well-being, a wellness entrepreneur ready to launch, grow, or
+                pivot, or a<br /> wellness professional looking to collaborate
+                within a vibrant ecosystem, look no further. Tahwil is your home
+                for
+                <br /> purpose-driven, culturally rooted, highly personalized,
+                and transformative wellness solutions.
               </p>
             </div>
             <div className="mt-5">
               <Button
                 onClick={handleBrowseJobsClick}
-                className="px-8 flex items-center gap-3 border-2 border-primary hover:text-primary"
+                className="px-8 flex items-center gap-3 border-2 hover:border-primary hover:text-primary"
               >
-                Explore <ArrowUpRight size={20} />
+                Learn More <ArrowUpRight size={20} />
               </Button>
             </div>
           </div>

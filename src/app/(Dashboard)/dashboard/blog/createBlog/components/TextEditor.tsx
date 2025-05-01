@@ -5,7 +5,7 @@ import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { RichTextEditor } from "@mantine/tiptap";
 
-const MAX_CHARACTERS = 1000;
+const MAX_CHARACTERS = 10000;
 
 interface RichTextProps {
   content?: string;
@@ -22,7 +22,7 @@ export function RichTextEditorComponent({
     onUpdate: ({ editor }) => {
       const textContent = editor.getText();
       if (textContent.length > MAX_CHARACTERS) {
-        editor.commands.setContent(textContent.slice(0, MAX_CHARACTERS)); // Limit characters
+        editor.commands.setContent(textContent.slice(0, MAX_CHARACTERS));
       } else {
         onChange?.(editor.getHTML());
       }

@@ -5,11 +5,13 @@ import Link from "next/link";
 import ToggleButton from "./ToogleButton";
 import { useState } from "react";
 import ResponsiveNav from "./ResponsiveNav";
-
+import { ArrowUpRight } from "lucide-react";
 import BookAppointment from "./BookAppointment";
+import { useRouter } from "next/navigation";
 // import ServiceTier from "./ServiceTier";
 // style={{ backgroundImage: `url(/assets/bgImage.jpg)` }}
 const Navbar = () => {
+  const router = useRouter();
   const navArr = [
     { id: 1, name: "Home", route: "/" },
     { id: 2, name: "About", route: "/about" },
@@ -29,10 +31,13 @@ const Navbar = () => {
   // const handlOpen = () => {
   //   setOpenModal((prev) => !prev);
   // };
+  const handleBrowseJobsClick = () => {
+    router.push("/about");
+  };
   return (
     <>
       <header className="  bg-transparent relative">
-        <nav className="flex items-center bg-white/20 backdrop-blur-[2px] justify-between absolute w-[100%] xl:px-24 lg:px-16 py-3  px-7 text-white">
+        <nav className="flex items-center bg-white/40 backdrop-blur-[3px] justify-between absolute w-[100%] xl:px-24 lg:px-16 py-3  px-7 text-white">
           <div className="">
             <Image
               width={70}
@@ -58,7 +63,10 @@ const Navbar = () => {
             ))}
           </ul>
           <div className="md:block hidden">
-            <Button onClick={() => setOpenModal(true)}>
+            <Button
+              className="hover:text-primary"
+              onClick={() => setOpenModal(true)}
+            >
               Book an Appointment
             </Button>
           </div>
@@ -89,6 +97,14 @@ const Navbar = () => {
             
             </SheetContent>
           </Sheet> */}
+          </div>
+          <div className="md:hidden block">
+            <Button
+              onClick={handleBrowseJobsClick}
+              className="px-8 flex items-center gap-3 border-2 hover:border-primary hover:text-primary"
+            >
+              Learn More <ArrowUpRight size={20} />
+            </Button>
           </div>
           <div className="md:hidden block">
             <ToggleButton

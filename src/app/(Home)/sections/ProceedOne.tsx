@@ -14,7 +14,7 @@ const ProceedOne = () => {
       </div>
       <div className="flex justify-between text-primary text-sm py-3 px-4 border-b border-t  border-gray-100 w-full">
         <span> Amount:</span>
-        <span>$50.00</span>
+        <span>N150,000</span>
       </div>
       <div className="mt-10">
         <Button
