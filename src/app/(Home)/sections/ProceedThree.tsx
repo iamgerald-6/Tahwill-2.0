@@ -14,10 +14,13 @@ const ProceedTwo = () => {
       </div>
       <div className="flex justify-between text-primary text-sm py-3 px-4 border-b border-t  border-gray-100 w-full">
         <span> Amount:</span>
-        <span>$300.00</span>
+        <span>N2,000,000</span>
       </div>
       <div className="mt-10">
-        <Button onClick={()=>setIsOpen(true)} className="bg-primary text-sm flex gap-2 items-center">
+        <Button
+          onClick={() => setIsOpen(true)}
+          className="bg-primary text-sm flex gap-2 items-center"
+        >
           Proceed to Payment
           <ArrowRight size={20} className="animate-arrow-loop" />
         </Button>

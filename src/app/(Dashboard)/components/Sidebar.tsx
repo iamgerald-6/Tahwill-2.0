@@ -33,7 +33,7 @@ const data = [
   { link: "/dashboard/blog", label: "Blog", icon: SquarePen },
   { link: "/dashboard/users", label: "Subscribers", icon: MailCheck },
   { link: "", label: "Analytics", icon: ChartPie },
-  { link: "", label: "Booking ", icon: CalendarDays },
+  { link: "/dashboard/booking", label: "Booking ", icon: CalendarDays },
   { link: "", label: "Settings", icon: Settings },
 ];
 

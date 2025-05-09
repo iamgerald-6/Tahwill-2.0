@@ -5,23 +5,24 @@ import { CircleUserRound } from "lucide-react";
 import SearchNav from "../components/SearchNav";
 import MoreBlog from "../components/MoreBlog";
 import { useQuery } from "@tanstack/react-query";
-import type { BlogDataType } from "../types";
+import type { BlogObjectType } from "../types";
 import moment from "moment";
 import { useParams } from "next/navigation";
 import DOMPurify from "dompurify";
+import axios from "axios";
 const InnerBlog = () => {
   const { id } = useParams();
   const getBlogData = async () => {
-    const res = await fetch(`/api/blog/${id}`);
+    const res = await axios.get(`/api/blog/${id}`);
 
-    if (!res.ok) {
+    if (!res.data) {
       throw new Error("Failed to fetch blog");
     }
 
-    return res.json();
+    return res.data;
   };
 
-  const { data, isLoading } = useQuery<BlogDataType>({
+  const { data, isLoading } = useQuery<BlogObjectType>({
     queryFn: getBlogData,
     queryKey: ["get_blog", id],
   });
@@ -41,7 +42,7 @@ const InnerBlog = () => {
       <SearchNav />
       <div className=" flex justify-center">
         <Image
-          src={(data?.blog?.cover_image as string) || "/placeholder-image.jpg"}
+          src={(data?.cover_image as string) || "/placeholder-image.jpg"}
           alt="blog image1"
           width={1200}
           height={500}
@@ -49,22 +50,22 @@ const InnerBlog = () => {
       </div>
       <div className="text-primary  md:px-28 px-6 mt-6 ">
         <h4 className="bg-gradient-to-r from-primary to-primary-100 bg-clip-text text-transparent inline-block">
-          {data?.blog.category}
+          {data?.category || "No category"}
         </h4>
-        <h2 className="text-3xl mt-3">{data?.blog.title}</h2>
+        <h2 className="text-3xl mt-3">{data?.title || "NO Title"}</h2>
         <div>
-          <div className="flex justify-between items-center gap-2 md:w-[70%]">
+          <div className="mt-5 flex justify-between items-center gap-2 md:w-[70%]">
             <div className="flex gap-3">
               <CircleUserRound />
               <div className="flex flex-col justify-center text-xs">
                 <span>Written By</span>
-                <span>{data?.blog.author}</span>
+                <span>{data?.author || "No Author"}</span>
               </div>
             </div>
             <div className="flex flex-col text-xs">
               <span>
-                {data?.blog?.created_at
-                  ? moment(data.blog.created_at).format("MMMM DD, YYYY")
+                {data?.created_at
+                  ? moment(data.created_at).format("MMMM DD, YYYY")
                   : "No date"}
               </span>
             </div>
@@ -72,9 +73,9 @@ const InnerBlog = () => {
         </div>
       </div>
       <div
-        className=" mt-3 text-primary px-5"
+        className=" mt-5 text-primary md:px-24 px-6"
         dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(data?.blog?.content || "")
+          __html: DOMPurify.sanitize(data?.content || ""),
         }}
       />
 

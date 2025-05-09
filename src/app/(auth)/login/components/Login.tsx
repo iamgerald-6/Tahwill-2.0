@@ -80,7 +80,6 @@ const Login = () => {
             </h4>
           </div>
 
-         
           <form onSubmit={handleSubmit(SubmitForm)}>
             <div className="grid gap-6 w-[100%]">
               <InputComponent
@@ -107,13 +106,12 @@ const Login = () => {
               <Button
                 type="submit"
                 loading={isPending}
-                className="w-full py-3 text-primary border border-primary hover:border-primary-200 "
+                className="w-full py-3 text-primary border border-primary hover:border-primary-200 hover:text-primary-200 "
               >
                 Sign In
               </Button>
             </div>
           </form>
-          
         </div>
       </div>
     </div>

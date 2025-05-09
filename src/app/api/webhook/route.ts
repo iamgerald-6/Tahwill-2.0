@@ -23,6 +23,7 @@ interface Booking {
   email: string;
 }
 
+// Email transporter configuration
 const transporter = nodemailer.createTransport({
   service: process.env.EMAIL_SERVICE || "gmail",
   auth: {
@@ -222,9 +223,6 @@ export async function POST(req: Request) {
         "💥 Database operation failed:",
         dbError instanceof Error ? dbError.message : "Unknown error"
       );
-
-      // In a real application, you would implement compensation logic here
-      // to undo any partial changes if needed
 
       return NextResponse.json(
         {

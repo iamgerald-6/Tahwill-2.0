@@ -55,7 +55,7 @@ const About = () => {
             <div className="mt-5">
               <Button
                 onClick={handleBrowseJobsClick}
-                className="px-10 text-primary border-primary hover:border-primary-200"
+                className="px-10 text-primary border-primary hover:border-primary-200 hover:text-primary-200"
               >
                 {" "}
                 Our Service <ArrowUpRight size={20} />
