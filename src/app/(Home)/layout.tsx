@@ -13,7 +13,7 @@ import ReduxProvider from "@/app/components/Provider";
 import QueryProvider from "@/app/components/QueryProvider";
 import { Toaster } from "sonner";
 
-import PreloaderWrapper from "@/app/components/PreloaderWrapper";
+// import PreloaderWrapper from "@/app/components/PreloaderWrapper";
 import { ChevronUp } from "lucide-react";
 import ScrollWrapper from "../components/ScrollContainer";
 const geistSans = Geist({
@@ -50,16 +50,16 @@ export default function RootLayout({
           <QueryProvider>
             <Toaster richColors position="top-center" />
             <MantineProvider defaultColorScheme="light">
-              <PreloaderWrapper>
-                <Navbar />
-                {children}
-                <div className="fixed bottom-10 right-10 z-50">
-                  <ScrollWrapper>
-                    <ChevronUp className="text-gray-700" size="50" />
-                  </ScrollWrapper>
-                </div>
-                <Footer />
-              </PreloaderWrapper>
+              {/* <PreloaderWrapper> */}
+              <Navbar />
+              {children}
+              <div className="fixed bottom-10 right-10 z-50">
+                <ScrollWrapper>
+                  <ChevronUp className="text-gray-700" size="50" />
+                </ScrollWrapper>
+              </div>
+              <Footer />
+              {/* </PreloaderWrapper> */}
             </MantineProvider>
           </QueryProvider>
         </ReduxProvider>
