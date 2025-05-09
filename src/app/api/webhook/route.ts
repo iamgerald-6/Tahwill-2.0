@@ -35,15 +35,15 @@ const transporter = nodemailer.createTransport({
 function createBookingEmail(customerName: string, calendlyLink: string) {
   return `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-      <h2 style="color: #2563eb;">Booking Confirmation</h2>
+      <h2 style="color: #2563eb;">Business Development</h2>
       <p>Hello ${customerName},</p>
-      <p>Thank you for your payment! Please schedule your appointment using the link below:</p>
+      <p>Thank you for booking with Tahwil. We are here to provide you with the clarity, structure and strategies needed for your next chapter. During your session, we’ll explore your vision, goals and pain points and provide you with a tailored plan to enable your wellness business grow sustainably, with intention. Please use the link below to schedule your session.</p>
       <a href="${calendlyLink}" 
          style="display: inline-block; padding: 12px 24px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 4px; margin: 20px 0;">
          Schedule Your Session
       </a>
       <p>If you have any questions, please reply to this email.</p>
-      <p>Best regards,<br/>Tahwil Solutions Team</p>
+      <p>Kind regards,<br/>Tahwil</p>
     </div>
   `;
 }
