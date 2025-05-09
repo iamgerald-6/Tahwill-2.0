@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/app/components/Button";
-import Image from "next/image";
+// import Image from "next/image";
 import { useState } from "react";
 // import TierOne from "./ModalTierOne";
 // import ModalTierTwo from "./ModalTierTwo";
