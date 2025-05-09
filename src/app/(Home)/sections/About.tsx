@@ -2,11 +2,11 @@
 import Image from "next/image";
 // import { Button } from "@/app/components/Button";
 // import { ArrowUpRight } from "lucide-react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
 const About = () => {
-  const router = useRouter();
+  // const router = useRouter();
   // const handleBrowseJobsClick = () => {
   //   router.push("/service");
   // };
