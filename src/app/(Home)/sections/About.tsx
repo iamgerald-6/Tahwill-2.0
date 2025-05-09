@@ -7,9 +7,9 @@ import { motion } from "framer-motion";
 
 const About = () => {
   const router = useRouter();
-  const handleBrowseJobsClick = () => {
-    router.push("/service");
-  };
+  // const handleBrowseJobsClick = () => {
+  //   router.push("/service");
+  // };
   return (
     <div className="pb-10 pt-20">
       <div className="grid md:grid-cols-2 gap-16 xl:px-24 lg:px-16 px-5   ">
