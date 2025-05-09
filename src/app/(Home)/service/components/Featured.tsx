@@ -7,7 +7,7 @@ import { useState } from "react";
 // import ModalThree from "./ModalThree";
 import Community from "@/app/components/Community";
 import BookAppointment from "../../sections/BookAppointment";
-
+import { motion } from "framer-motion";
 const Featured = () => {
   // const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -17,7 +17,7 @@ const Featured = () => {
     <div className="mt-24">
       <div className="bg-[#01051B]">
         <div className=" py-7 text-white">
-          <div className="flex flex-col md:px-16 px-10 gap-4">
+          {/* <div className="flex flex-col md:px-16 px-10 gap-4">
             <h3 className="text-4xl">
               Discover
               <br className="md:block hidden" /> Programs
@@ -36,11 +36,17 @@ const Featured = () => {
                 Join Community
               </Button>
             </div>
-          </div>
+          </div> */}
           <div className="mt-14 ">
-            <div className="md:flex md:justify-between md:items-center md:px-16 px-6 text-white py-20 border-t border-gray-100  gap-16 ">
-              <div className="w-10 text-lg ">01</div>
-              <div className=" md:col-span-2  px-5 py-3 bg-primary/15 rounded-lg">
+            <div className="md:flex md:justify-between md:items-center md:px-16 px-6 text-white py-20 border-t border-gray-100   ">
+              {/* <div className="w-10 text-lg ">01</div> */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="   px-5 py-6 bg-primary/15 rounded-lg w-full"
+              >
                 <h2 className="text-4xl mt-3">
                   Wellness Education and Empowerment
                 </h2>
@@ -49,27 +55,33 @@ const Featured = () => {
                   individuals and organizations to build balanced, sustainable
                   lives through workshops, webinars, and online resources
                 </p>
-                {/* <div className="mt-3">
+                <div className="mt-3">
                   <Button
-                    onClick={() => setOpen(true)}
+                    // onClick={() => setOpen(true)}
                     className="bg-white/80 text-primary px-5 transition ease-in-out duration-500 hover:text-white hover:bg-transparent"
                   >
-                    Book now
+                    Enquire
                   </Button>
-                </div> */}
-              </div>
-              <div>
+                </div>
+              </motion.div>
+              {/* <div>
                 <Image
                   src={"/assets/featured.jpg"}
                   alt="featured image1"
                   width={350}
                   height={500}
                 />
-              </div>
+              </div> */}
             </div>
-            <div className="md:flex md:justify-between md:items-center md:px-16 px-6 text-white py-20 border-t border-gray-100  gap-16 ">
-              <div className="w-10 text-lg ">02</div>
-              <div className=" md:col-span-2  px-5 py-3 bg-primary/15 rounded-lg">
+            <div className="md:flex md:justify-between md:items-center md:px-16 px-6 text-white py-20 border-t border-gray-100   ">
+              {/* <div className="w-10 text-lg ">02</div> */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="  px-5 py-6 bg-primary/15 rounded-lg w-full"
+              >
                 <h2 className="text-4xl mt-3">
                   Business Development Consulting for Wellness Entrepreneurs
                 </h2>
@@ -86,19 +98,33 @@ const Featured = () => {
                     Book now
                   </Button>
                 </div> */}
-              </div>
-              <div>
+                <div className="">
+                  <Button
+                    onClick={() => setOpenModal(true)}
+                    className="bg-white/80 mt-3 text-primary px-5 transition ease-in-out duration-500 hover:text-white hover:bg-transparent"
+                  >
+                    Book a Consultation
+                  </Button>
+                </div>
+              </motion.div>
+              {/* <div>
                 <Image
                   src={"/assets/sevciceImage.jpg"}
                   alt="featured image1"
                   width={260}
                   height={500}
                 />
-              </div>
+              </div> */}
             </div>
-            <div className="md:flex md:justify-between md:items-center md:px-16 px-6 text-white py-20 border-t border-gray-100  gap-16 ">
-              <div className="w-10 text-lg ">03</div>
-              <div className=" md:col-span-2  px-5 py-3 bg-primary/15 rounded-lg">
+            <div className="md:flex md:justify-between md:items-center md:px-16 px-6 text-white py-20 border-t border-gray-100   ">
+              {/* <div className="w-10 text-lg ">03</div> */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="   px-5 py-6 bg-primary/15 rounded-lg w-full"
+              >
                 <h2 className="text-4xl mt-3">
                   Tailored Individual Wellness Programs
                 </h2>
@@ -107,58 +133,70 @@ const Featured = () => {
                   relevant guidance to support holistic health across nutrition,
                   fitness, mental well-being, and lifestyle.
                 </p>
-                {/* <div className="mt-3">
+                <div className="mt-3">
                   <Button
-                    onClick={() => setIsOpenModal(true)}
+                    // onClick={() => setIsOpenModal(true)}
                     className="bg-white/80 text-primary px-5 transition ease-in-out duration-500 hover:text-white hover:bg-transparent"
                   >
-                    Book now
+                    Enquire
                   </Button>
-                </div> */}
-              </div>
-              <div>
+                </div>
+              </motion.div>
+              {/* <div>
                 <Image
                   src={"/assets/about-home.png"}
                   alt="featured image1"
                   width={250}
                   height={500}
                 />
-              </div>
+              </div> */}
             </div>
-            <div className="md:flex md:justify-between md:items-center md:px-16 px-6 text-white py-20 border-t border-gray-100  gap-16 ">
-              <div className="w-10 text-lg ">04</div>
-              <div className=" md:col-span-2  px-5 py-3 bg-primary/15 rounded-lg">
+            <div className="md:flex md:justify-between md:items-center md:px-16 px-6 text-white py-20 border-t border-gray-100 w-full  ">
+              {/* <div className="w-10 text-lg ">04</div> */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="   px-5 py-6 bg-primary/15 rounded-lg w-full"
+              >
                 <h2 className="text-4xl mt-3">Corporate Wellness Programs</h2>
                 <p className="text-sm md:w-[70%] mt-3">
                   We work with organizations to develop custom workplace
                   wellness programs that improve employee health, engagement,
                   and performance.
                 </p>
-                {/* <div className="mt-3">
+                <div className="mt-3">
                   <Button
-                    onClick={() => setIsOpenModal(true)}
+                    // onClick={() => setIsOpenModal(true)}
                     className="bg-white/80 text-primary px-5 transition ease-in-out duration-500 hover:text-white hover:bg-transparent"
                   >
-                    Book now
+                    Enquire
                   </Button>
-                </div> */}
-              </div>
-              <div>
+                </div>
+              </motion.div>
+              {/* <div>
                 <Image
                   src={"/assets/about-home.png"}
                   alt="featured image1"
                   width={250}
                   height={500}
                 />
-              </div>
+              </div> */}
             </div>
-            <div className="md:flex md:justify-between md:items-center md:px-16 px-6 text-white py-20 border-t border-gray-100  gap-16 ">
-              <div className="w-10 text-lg ">05</div>
-              <div className=" md:col-span-2  px-5 py-3 bg-primary/15 rounded-lg">
+            <div className="md:flex md:justify-between md:items-center md:px-16 px-6 text-white py-20 border-t border-gray-100  w-full p ">
+              {/* <div className="w-10 text-lg ">05</div> */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="  px-5 py-6 bg-primary/15 rounded-lg w-full "
+              >
                 <h2 className="text-4xl mt-3">
                   Wellness Ecosystem Development
                 </h2>
-                <p className="text-sm md:w-[70%] mt-3">
+                <p className="text-sm md:w-[60%] mt-3">
                   We are building a vibrant, interconnected wellness ecosystem
                   that brings together a diverse network of vetted and licensed
                   wellness professionals, including nutritionists, therapists,
@@ -166,32 +204,24 @@ const Featured = () => {
                   medicine practitioners, holistic health practitioners, and
                   organic farm-to-table supply chains.
                 </p>
-                {/* <div className="mt-3">
+                <div className="mt-3">
                   <Button
-                    onClick={() => setIsOpenModal(true)}
+                    // onClick={() => setIsOpenModal(true)}
                     className="bg-white/80 text-primary px-5 transition ease-in-out duration-500 hover:text-white hover:bg-transparent"
                   >
-                    Book a Consultation
+                    Enquire
                   </Button>
-                </div> */}
-              </div>
-              <div>
+                </div>
+              </motion.div>
+              {/* <div>
                 <Image
                   src={"/assets/about-home.png"}
                   alt="featured image1"
                   width={250}
                   height={500}
                 />
-              </div>
+              </div> */}
             </div>
-          </div>
-          <div className="mt-3 flex justify-center">
-            <Button
-              onClick={() => setOpenModal(true)}
-              className="bg-white/80 text-primary px-5 transition ease-in-out duration-500 hover:text-white hover:bg-transparent"
-            >
-              Book a Consultation
-            </Button>
           </div>
         </div>
       </div>

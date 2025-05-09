@@ -14,6 +14,8 @@ import QueryProvider from "@/app/components/QueryProvider";
 import { Toaster } from "sonner";
 
 import PreloaderWrapper from "@/app/components/PreloaderWrapper";
+import { ChevronUp } from "lucide-react";
+import ScrollWrapper from "../components/ScrollContainer";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -37,6 +39,8 @@ export default function RootLayout({
   return (
     <html lang="en" {...mantineHtmlProps}>
       <head>
+        <link rel="icon" type="image/svg+xml" href="/Tahwil 2.svg" />
+
         <ColorSchemeScript />
       </head>
       <body
@@ -49,6 +53,11 @@ export default function RootLayout({
               <PreloaderWrapper>
                 <Navbar />
                 {children}
+                <div className="fixed bottom-10 right-10 z-50">
+                  <ScrollWrapper>
+                    <ChevronUp className="text-gray-700" size="50" />
+                  </ScrollWrapper>
+                </div>
                 <Footer />
               </PreloaderWrapper>
             </MantineProvider>

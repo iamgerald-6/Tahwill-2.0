@@ -11,7 +11,7 @@ const Home = () => {
       <div>
         <Hero />
       </div>
-      <div className="bg-gradient-to-b from-primary/5  via-primary-100/5 to-primary-200/5">
+      <div className="bg-gradient-to-b from-primary/10  via-primary-100/10 to-primary-200/10">
         <About />
       </div>
       <div>

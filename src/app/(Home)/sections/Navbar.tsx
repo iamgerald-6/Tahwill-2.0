@@ -5,7 +5,7 @@ import Link from "next/link";
 import ToggleButton from "./ToogleButton";
 import { useState } from "react";
 import ResponsiveNav from "./ResponsiveNav";
-import { ArrowUpRight } from "lucide-react";
+// import { ArrowUpRight } from "lucide-react";
 import BookAppointment from "./BookAppointment";
 import { useRouter } from "next/navigation";
 // import ServiceTier from "./ServiceTier";
@@ -52,11 +52,7 @@ const Navbar = () => {
                 key={navigation.id}
                 className="text-lg  hover:text-primary duration-300 ease-out cursor-pointer"
               >
-                <Link
-                  href={navigation.route}
-                  data-scroll-to
-                  className="cursor-pointer"
-                >
+                <Link href={navigation.route} className="cursor-pointer">
                   {navigation.name}
                 </Link>
               </li>
@@ -101,9 +97,9 @@ const Navbar = () => {
           <div className="md:hidden block">
             <Button
               onClick={handleBrowseJobsClick}
-              className="px-8 flex items-center gap-3 border-2 hover:border-primary hover:text-primary"
+              className="px-4 text-sm flex items-center gap-3 border-2 hover:border-primary hover:text-primary"
             >
-              Learn More <ArrowUpRight size={20} />
+              Learn More
             </Button>
           </div>
           <div className="md:hidden block">
