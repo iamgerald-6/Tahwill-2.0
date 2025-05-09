@@ -3,7 +3,6 @@ import axios from "axios";
 import { neon } from "@neondatabase/serverless";
 import nodemailer from "nodemailer";
 
-// Initialize Neon with transaction support
 const sql = neon(process.env.DATABASE_URL!);
 
 interface Payment {
@@ -24,7 +23,6 @@ interface Booking {
   email: string;
 }
 
-// Email transporter configuration
 const transporter = nodemailer.createTransport({
   service: process.env.EMAIL_SERVICE || "gmail",
   auth: {
