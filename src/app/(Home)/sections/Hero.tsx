@@ -35,11 +35,11 @@ const Hero = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        minHeight: "100vh",
+        minHeight: "90vh",
       }}
     >
-      <div className="bg-black/70  min-h-[100vh] w-full">
-        <div className="  md:flex md:flex-col md:items-center md:px-20 md:pt-42 pt-34 px-8 min-h-[100vh]  text-white">
+      <div className="bg-black/70  min-h-[90vh] w-full">
+        <div className="  md:flex md:flex-col md:items-center md:justify-center  px-8 min-h-[90vh]  text-white">
           <div className=" ">
             <div className="text-white lg:text-5xl md:text-5xl text-4xl ">
               <p className="uppercase">
