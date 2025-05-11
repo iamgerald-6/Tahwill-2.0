@@ -48,7 +48,7 @@ const BlogPost = () => {
             height={500}
           />
         </div>
-        <div className="text-primary">
+        <div className="  text-primary">
           <h4 className="bg-gradient-to-r from-primary to-primary-100 bg-clip-text text-transparent inline-block">
             {featuredBlog.category}
           </h4>
@@ -60,7 +60,7 @@ const BlogPost = () => {
           <div className="mt-6 text-xs">
             <span>{new Date(featuredBlog.created_at).toDateString()}</span>
           </div>
-          <div className="mt-3">
+          <div className="  mt-3">
             <div className="flex gap-2">
               <Image
                 src={"/assets/Ellipse 7.png"}
@@ -72,15 +72,15 @@ const BlogPost = () => {
                 <span>Written By</span>
                 <span>{featuredBlog.author}</span>
               </div>
-              <div className="mt-7">
-                <Link
-                  href={`/blog/${featuredBlog.id}`}
-                  className="hover:text-primary-200 flex items-center gap-2 "
-                >
-                  Read more{" "}
-                  <ArrowRight size={20} className="hover:text-primary-200" />
-                </Link>
-              </div>
+            </div>
+            <div className="mt-7">
+              <Link
+                href={`/blog/${featuredBlog.id}`}
+                className="hover:text-primary-200 flex items-center gap-2 "
+              >
+                Read more{" "}
+                <ArrowRight size={20} className="hover:text-primary-200" />
+              </Link>
             </div>
           </div>
         </div>

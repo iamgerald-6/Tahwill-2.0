@@ -7,8 +7,9 @@ const SearchNav = () => {
   const blogNav = [
     { id: 1, name: "Physical Health ", route: "#" },
     { id: 2, name: "Mental Health ", route: "#" },
-    { id: 3, name: "Spiritual Well-being ", route: "#" },
-    { id: 4, name: "Wellness", route: "#" },
+    { id: 3, name: "Spiritual and emotional.. ", route: "#" },
+    { id: 4, name: "Business..", route: "#" },
+    { id: 5, name: "Personal..", route: "#" },
   ];
   const [open, setOpen] = useState(false);
   const openSidebar = () => {
@@ -21,9 +22,9 @@ const SearchNav = () => {
   return (
     <>
       <div>
-        <nav className="flex justify-between bg-primary-500/10 md:px-16 px-5 py-3">
+        <nav className="sm:flex  justify-between bg-primary-500/10 md:px-16 px-5 py-3">
           <div className="flex gap-10 items-center ">
-            <div className="md:hidden block">
+            <div className="lg:hidden block">
               <ToogleButtonBlog
                 open={open}
                 setOpen={open ? closeSidebar : openSidebar}
@@ -32,7 +33,7 @@ const SearchNav = () => {
 
             {blogNav.map((blogging) => (
               <div key={blogging.id}>
-                <ul className="md:block hidden">
+                <ul className="lg:block hidden">
                   <li className="hover:text-primary cursor-pointer font-medium">
                     {blogging.name}
                   </li>

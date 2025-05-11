@@ -73,9 +73,12 @@ const InnerBlog = () => {
         </div>
       </div>
       <div
-        className=" mt-5 text-primary md:px-24 px-6"
+        className="mt-10 text-primary md:px-24 px-6 prose prose-sm md:prose-lg max-w-none"
         dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(data?.content || ""),
+          __html: DOMPurify.sanitize(data?.content || "", {
+            ADD_TAGS: ["img"],
+            ADD_ATTR: ["src", "alt", "style", "width", "height"],
+          }),
         }}
       />
 

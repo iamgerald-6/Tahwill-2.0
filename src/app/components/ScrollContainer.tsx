@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/dist/locomotive-scroll.css";
+// import { setScrollInstance } from "./ScrollTop";
 
 interface ScrollWrapperProps {
   children: React.ReactNode;
@@ -14,26 +15,27 @@ const ScrollWrapper: React.FC<ScrollWrapperProps> = ({ children }) => {
   const [isAtTop, setIsAtTop] = useState<boolean>(true);
 
   useEffect(() => {
-    scrollInstance.current = new LocomotiveScroll({
-      lenisOptions: {
-        wrapper: scrollRef.current!,
-        lerp: 0.6,
-        duration: 4,
-        orientation: "vertical",
-        gestureOrientation: "vertical",
-        smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 2,
-      },
-
-      scrollCallback: (data) => {
-        const scroll = data.scroll;
-        if (scroll !== undefined) {
-          setIsAtTop(scroll === 0);
-          //   console.log(scroll, "testing");/
-        }
-      },
-    });
+    if (scrollRef.current) {
+      scrollInstance.current = new LocomotiveScroll({
+        lenisOptions: {
+          wrapper: scrollRef.current,
+          lerp: 0.6,
+          duration: 4,
+          orientation: "vertical",
+          gestureOrientation: "vertical",
+          smoothWheel: true,
+          wheelMultiplier: 1,
+          touchMultiplier: 2,
+        },
+        scrollCallback: (data) => {
+          const scroll = data.scroll;
+          if (scroll !== undefined) {
+            setIsAtTop(scroll === 0);
+          }
+        },
+      });
+      // setScrollInstance(scrollInstance.current);
+    }
 
     return () => {
       if (scrollInstance.current) {

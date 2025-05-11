@@ -114,7 +114,7 @@ export async function POST(req: Request) {
     const category = formData.get("category") as string;
     const author = formData.get("author") as string;
     const status = (formData.get("status") as string) || "draft";
-    const coverImage = formData.get("cover_image") as File | null;
+    const coverImage = formData.get("cover_image") as string | null;
 
     // Validation
     if (!title || !content || !author) {
@@ -125,21 +125,21 @@ export async function POST(req: Request) {
     }
 
     // File validation
-    if (coverImage) {
-      const allowedMimeTypes = ["image/jpeg", "image/png"];
-      if (!allowedMimeTypes.includes(coverImage.type)) {
-        return NextResponse.json(
-          { message: "Invalid file type. Only JPEG/PNG allowed" },
-          { status: 400 }
-        );
-      }
-      if (coverImage.size > 5 * 1024 * 1024) {
-        return NextResponse.json(
-          { message: "File size exceeds 5MB limit" },
-          { status: 400 }
-        );
-      }
-    }
+    // if (coverImage) {
+    //   const allowedMimeTypes = ["image/jpeg", "image/png"];
+    //   if (!allowedMimeTypes.includes(coverImage.type)) {
+    //     return NextResponse.json(
+    //       { message: "Invalid file type. Only JPEG/PNG allowed" },
+    //       { status: 400 }
+    //     );
+    //   }
+    //   if (coverImage.size > 5 * 1024 * 1024) {
+    //     return NextResponse.json(
+    //       { message: "File size exceeds 5MB limit" },
+    //       { status: 400 }
+    //     );
+    //   }
+    // }
 
     // Sanitization
     const sanitizedTitle = validator.escape(title);
@@ -155,19 +155,24 @@ export async function POST(req: Request) {
         "ol",
         "li",
         "a",
+        "img",
       ],
-      allowedAttributes: { a: ["href", "target"] },
+      allowedAttributes: {
+        a: ["href", "target"],
+        img: ["src", "alt", "width", "height", "style"],
+      },
     });
 
     // File upload
-    let imageUrl = null;
-    if (coverImage) {
-      const buffer = Buffer.from(await coverImage.arrayBuffer());
-      const fileName = `${Date.now()}-${coverImage.name.replace(/\s/g, "_")}`;
-      const filePath = path.join(uploadDir, fileName);
-      await fs.writeFile(filePath, buffer);
-      imageUrl = `/uploads/${fileName}`;
-    }
+    // let imageUrl = null;
+    // if (coverImage) {
+    //   const buffer = Buffer.from(await coverImage.arrayBuffer());
+    //   const fileName = `${Date.now()}-${coverImage.name.replace(/\s/g, "_")}`;
+    //   const filePath = path.join(uploadDir, fileName);
+    //   await fs.writeFile(filePath, buffer);
+    //   imageUrl = `/uploads/${fileName}`;
+    // }
+    const imageUrl = coverImage;
 
     // Database insert with type assertion
     const insertResult = await sql`

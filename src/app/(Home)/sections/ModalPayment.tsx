@@ -1,23 +1,31 @@
-"use client"
-import apiRoutes from '@/app/apiRoutes';
-import { Button } from '@/app/components/Button';
-import InputComponent from '@/app/components/Inputs'
-import { Modal } from '@/app/components/Modal'
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/app/components/Select';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+"use client";
+import apiRoutes from "@/app/apiRoutes";
+import { Button } from "@/app/components/Button";
+import InputComponent from "@/app/components/Inputs";
+import { Modal } from "@/app/components/Modal";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/app/components/Select";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
-import { useForm, type SubmitHandler } from 'react-hook-form';
-import { toast } from 'sonner';
-import { z } from 'zod';
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 const PaymentState = z.object({
-     email: z
-       .string()
-       .min(1, { message: "Email is required" })
-       .email({ message: "Invalid email address" }),
-    amount: z.string().min(1, { message: "Amount is Required" }),
-       currency: z.string().min(1, {message:"Required"})
+  email: z
+    .string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Invalid email address" }),
+  amount: z.string().min(1, { message: "Amount is Required" }),
+  currency: z.string().min(1, { message: "Required" }),
 });
 interface ModalType {
   open: boolean;
@@ -43,7 +51,7 @@ const ModalPayment = ({ open, setOpen, tierName }: ModalType) => {
     const res = await axios.post(apiRoutes.payment.paymentApi, {
       email: data.email,
       amount: Number(data.amount),
-      currency: data.currency,
+      currency: data.currency || "NGN",
 
       tier_name: tierName,
     });
@@ -91,6 +99,7 @@ const ModalPayment = ({ open, setOpen, tierName }: ModalType) => {
             <InputComponent
               label="Amount"
               type="text"
+              // read-only
               placeholder="Enter Amount"
               {...register("amount")}
               errors={errors.amount?.message}
@@ -100,7 +109,7 @@ const ModalPayment = ({ open, setOpen, tierName }: ModalType) => {
               <SelectTrigger className="w-[180px] text-sm">
                 <SelectValue placeholder="NGN" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white">
                 <SelectGroup>
                   <SelectLabel className="text-sm font-semibold uppercase text-primary">
                     Currency
@@ -129,4 +138,4 @@ const ModalPayment = ({ open, setOpen, tierName }: ModalType) => {
   );
 };
 
-export default ModalPayment
+export default ModalPayment;

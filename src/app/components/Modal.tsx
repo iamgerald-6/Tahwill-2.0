@@ -41,7 +41,7 @@ export function Modal({
   title,
   description,
   size = "xl",
-//   drawerHeight,
+  //   drawerHeight,
   footer,
   setter = "url",
   centeredHeader,
@@ -126,7 +126,10 @@ export function Modal({
             {description}
           </DialogDescription>
         </DialogHeader>
-        <div className="px-4 flex-1 overflow-y-auto max-h-[70vh]">
+        <div
+          className="px-4 flex-1 overflow-y-auto max-h-[70vh] scroll-inside"
+          data-lenis-prevent
+        >
           {children}
         </div>
         <DialogFooter className="p-4 pt-2">{footer}</DialogFooter>
@@ -134,4 +137,3 @@ export function Modal({
     </Dialog>
   );
 }
-

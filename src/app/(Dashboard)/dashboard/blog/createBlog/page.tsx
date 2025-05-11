@@ -3,12 +3,15 @@
 import InputComponent from "@/app/components/Inputs";
 import React, { useState } from "react";
 import { RichTextEditorComponent } from "./components/TextEditor";
-import { Select,  SelectContent,
+import {
+  Select,
+  SelectContent,
   SelectGroup,
   SelectItem,
   SelectLabel,
   SelectTrigger,
-  SelectValue } from "@/app/components/Select";
+  SelectValue,
+} from "@/app/components/Select";
 import { Button } from "@/app/components/Button";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,127 +29,151 @@ const blogState = z.object({
   category: z.string().min(1, { message: "Author is required" }),
 });
 const CreateBlog = () => {
-    const [file, setFile] = useState<File | null>(null);
-    // const [uploading, setUploading] = useState(false);
-     const [editorContent, setEditorContent] = useState<string>("");
-     type blogType = z.infer<typeof blogState>;
-      const {
-        register,
-        formState: { errors },
-        // handleSubmit,
-          watch,
-        getValues,
-        setValue,
-      } = useForm<blogType>({
-        resolver: zodResolver(blogState),
-        defaultValues: {},
-      });
-    const allValuesFilled =
-      watch("title") &&
-      watch("author") &&
-      watch("category") &&
-      editorContent.trim().length > 0 &&
-      file;
-    const router = useRouter();
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const selectedFile = event.target.files?.[0];
-      if (!selectedFile) return;
+  const [coverImageUrl, setCoverImageUrl] = useState<string | null>(null);
 
-      const fileSizeMB = selectedFile.size / (1024 * 1024); 
+  // const [uploading, setUploading] = useState(false);
+  const [editorContent, setEditorContent] = useState<string>("");
+  type blogType = z.infer<typeof blogState>;
+  const {
+    register,
+    formState: { errors },
+    // handleSubmit,
+    watch,
+    getValues,
+    setValue,
+  } = useForm<blogType>({
+    resolver: zodResolver(blogState),
+    defaultValues: {},
+  });
+  const allValuesFilled =
+    watch("title") &&
+    watch("author") &&
+    watch("category") &&
+    editorContent.trim().length > 0 &&
+    coverImageUrl;
+  const router = useRouter();
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const selectedFile = event.target.files?.[0];
+    if (!selectedFile) return;
 
-      if (fileSizeMB > 3) {
-        alert("File size is too large. Maximum allowed size is 3MB.");
-        return;
+    const fileSizeMB = selectedFile.size / (1024 * 1024);
+    if (fileSizeMB > 0.5) {
+      alert("Cover image too large. Maximum allowed is 500KB.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+    formData.append("upload_preset", "blog_tahwil");
+    formData.append("cloud_name", "dmvr8ooz1");
+
+    try {
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dmvr8ooz1/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await res.json();
+      if (data.secure_url) {
+        setCoverImageUrl(data.secure_url);
+      } else {
+        alert("Image upload failed.");
       }
-
-      setFile(selectedFile);
-    };
-    const catergoryArr = [
-      { id: 1, category: "Physical Health" },
-      { id: 2, category: "Mental Health" },
-      { id: 3, category: "Spiritual Well-being " },
-      { id: 4, category: "Wellness" },
-     
-    ];
+    } catch (err) {
+      console.error("Upload error:", err);
+      alert("Error uploading image.");
+    }
+  };
+  const catergoryArr = [
+    { id: 1, category: "Physical Health" },
+    { id: 2, category: "Mental Health" },
+    { id: 3, category: "Spiritual and emotional wellness " },
+    { id: 4, category: "Business development" },
+    { id: 5, category: "Personal development" },
+  ];
   const handleEditorChange = (newContent: string) => {
     setEditorContent(newContent);
-    };
-    console.log(errors, "errors")
-    
+  };
+  console.log(errors, "errors");
 
-    const postData = async ({
-      data,
-      status,
-    }: {
-      data: blogType;
-      status: string;
-    }) => {
-      const formData = new FormData();
-      if (file) {
-        formData.append("cover_image", file);
+  const postData = async ({
+    data,
+    status,
+  }: {
+    data: blogType;
+    status: string;
+  }) => {
+    const formData = new FormData();
+    if (coverImageUrl) {
+      formData.append("cover_image", coverImageUrl);
+    } else {
+      console.error("No cover image URL available.");
+    }
+    console.log("postData function called with:", { data, status });
+    formData.append("title", data.title || "");
+    formData.append("author", data.author || "");
+    formData.append("category", data.category || "");
+    formData.append("content", editorContent || "");
+    formData.append("status", status);
+    const res = await api.post(apiRoutes.blog.postBlog, formData);
+    return res.data;
+  };
+  // publisj
+  const { mutate: publishMutate, isPending: pendingPublish } = useMutation({
+    mutationFn: postData,
+    onSuccess: (data) => {
+      if (data) {
+        toast("Successfully added");
+
+        // navigate(redirectUrl || "/dashboard");
+        router.replace("/dashboard/blog");
       } else {
-        console.error("No file selected.");
-        }
-         console.log("postData function called with:", { data, status });
-      formData.append("title", data.title || "");
-      formData.append("author", data.author || "");
-      formData.append("category", data.category || "");
-      formData.append("content", editorContent || "");
-      formData.append("status", status);
-      const res = await api.post(apiRoutes.blog.postBlog, formData);
-      return res.data;
-    };
-    // publisj
-    const { mutate:publishMutate, isPending:pendingPublish } = useMutation({
-      mutationFn: postData,
-      onSuccess: (data) => {
-        if (data) {
-          toast("Successfully added");
+        toast.error("Something Went Wrong");
+      }
+    },
+    onError: (error: any) => {
+      const errorMessage =
+        error?.response?.data?.message ||
+        error?.message ||
+        "An unexpected error occurred";
 
-          // navigate(redirectUrl || "/dashboard");
-          router.replace("/dashboard/blog");
-        } else {
-          toast.error("Something Went Wrong");
-        }
-      },
-      onError: (error: any) => {
-        const errorMessage =
-          error?.response?.data?.message ||
-          error?.message ||
-          "An unexpected error occurred";
+      toast.warning(errorMessage);
+    },
+  });
+  // draft
+  const { mutate, isPending } = useMutation({
+    mutationFn: postData,
+    onSuccess: (data) => {
+      if (data) {
+        toast("Successfully added");
+        router.replace("/dashboard/blog");
+      } else {
+        toast.error("Something Went Wrong");
+      }
+    },
+    onError: (error: any) => {
+      const errorMessage =
+        error?.response?.data?.message ||
+        error?.message ||
+        "An unexpected error occurred";
 
-        toast.warning(errorMessage);
-      },
-    });
-// draft
-    const { mutate, isPending } = useMutation({
-      mutationFn: postData,
-      onSuccess: (data) => {
-        if (data) {
-          toast("Successfully added");
-          router.replace("/dashboard/blog");
-        } else {
-          toast.error("Something Went Wrong");
-        }
-      },
-      onError: (error: any) => {
-        const errorMessage =
-          error?.response?.data?.message ||
-          error?.message ||
-          "An unexpected error occurred";
+      toast.warning(errorMessage);
+    },
+  });
 
-        toast.warning(errorMessage);
-      },
-    });
-   
-    const handlePublish = (data: blogType)=>{
-      publishMutate({ data, status: "published" });
-    };
-    
-   const handleDraft = (data: blogType) => {
-     mutate({ data, status: "draft" });
-   };
-        
+  const handlePublish = (data: blogType) => {
+    publishMutate({ data, status: "published" });
+  };
+
+  const handleDraft = (data: blogType) => {
+    mutate({ data, status: "draft" });
+  };
+
   return (
     <div className="mt-10">
       <h3 className="px-20">Create Blog</h3>
@@ -159,7 +186,7 @@ const CreateBlog = () => {
             errors={errors?.title?.message}
           />
           <InputComponent
-            label="Blog Image"
+            label="Blog Cover Image"
             type="file"
             accept="image/png, image/jpeg"
             onChange={handleFileChange}
@@ -178,16 +205,20 @@ const CreateBlog = () => {
               <Select
                 onValueChange={(val: string) => setValue("category", val)}
               >
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] bg-white">
                   <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel className="text-sm font-semibold uppercase text-primary">
+                  <SelectGroup className="bg-white">
+                    <SelectLabel className="text-sm font-semibold uppercase text-primary bg">
                       Categories
                     </SelectLabel>
                     {catergoryArr.map((item) => (
-                      <SelectItem key={item.id} value={item.category}>
+                      <SelectItem
+                        className="bg-white"
+                        key={item.id}
+                        value={item.category}
+                      >
                         {item.category}
                       </SelectItem>
                     ))}
