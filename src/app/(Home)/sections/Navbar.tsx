@@ -31,6 +31,7 @@ const Navbar = () => {
   // const handlOpen = () => {
   //   setOpenModal((prev) => !prev);
   // };
+
   const handleBrowseJobsClick = () => {
     router.push("/about");
   };

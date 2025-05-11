@@ -62,8 +62,11 @@ const Login = () => {
     },
   });
   const SubmitForm: SubmitHandler<loginType> = (data) => {
-    mutate(data);
+    requestAnimationFrame(() => {
+      mutate(data);
+    });
   };
+
   return (
     <div className="min-h-screen flex justify-center items-center ">
       <div className="flex flex-col justify-center items-center shadow-lg rounded-md py-5 px-12">
@@ -106,6 +109,7 @@ const Login = () => {
               <Button
                 type="submit"
                 loading={isPending}
+                disabled={isPending}
                 className="w-full py-3 text-primary border border-primary hover:border-primary-200 hover:text-primary-200 "
               >
                 Sign In

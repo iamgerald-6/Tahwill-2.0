@@ -1,6 +1,6 @@
-export interface Blogdata { 
-    status: boolean,
-    blogs:BlogArr[]
+export interface Blogdata {
+  status: boolean;
+  blogs: BlogArr[];
 }
 export interface BlogArr {
   id: number;

@@ -21,7 +21,13 @@ const MoreBlog = () => {
     queryFn: getBlogData,
     queryKey: ["get_blog"],
   });
-
+  if (!data?.blogs?.length) {
+    return (
+      <p className="text-center text-gray-500 mt-10">
+        No blogs available at the moment.
+      </p>
+    );
+  }
   return (
     <div className="mt-16 pb-10">
       <div className=" flex justify-center text-xl py-4  bg-gray-300">
