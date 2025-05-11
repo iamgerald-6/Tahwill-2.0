@@ -1,15 +1,15 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
+// import { promises as fs } from "fs";
+// import path from "path";
 import sql from "@/app/utils/db";
 import validator from "validator";
 import { verifyToken } from "@/app/utils/jwt";
 import sanitizeHtml from "sanitize-html";
 
-const uploadDir = path.join(
-  process.cwd(),
-  process.env.UPLOAD_DIR || "public/uploads"
-);
+// const uploadDir = path.join(
+//   process.cwd(),
+//   process.env.UPLOAD_DIR || "public/uploads"
+// );
 
 interface Blog {
   id: number;
